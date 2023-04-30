@@ -16,6 +16,7 @@ struct RecentView: View {
                     .frame(width: 30,height: 8)
                 Spacer()
             }
+            
             .padding()
             Spacer()
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

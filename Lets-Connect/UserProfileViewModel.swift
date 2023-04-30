@@ -9,17 +9,19 @@ import Foundation
 
 
 class UserProfileViewModel:ObservableObject{
-    
-    @Published var socialProfiles: [SocialMediaProfile] = [SocialMediaProfile(profileImageName: "test_image_1", socialMediaIcon: "test_image_1", profileURL: nil, platform: "Instagram"),
-                                                           SocialMediaProfile(profileImageName: "test_image_1", socialMediaIcon: "test_image_1", profileURL: nil, platform: "LinkedIn"),]
-    
-    func addSocialProfile(profileImageName: String, socialMediaIcon: String, platform: String, url: String) {
-        let newProfile = SocialMediaProfile(profileImageName: profileImageName, socialMediaIcon: socialMediaIcon, profileURL: url, platform: platform)
+    @Published  var activeProfileIndex: Int = 0
+    var selectedProfile: SocialMediaProfile {
+        socialProfiles[activeProfileIndex]
+    }
+    @Published var socialProfiles: [SocialMediaProfile] = [SocialMediaProfile( platform: .Instagram, profileURL: "nil"),
+                                                           SocialMediaProfile( platform: .LinkedIn, profileURL: "nil"),]
+    func addSocialProfile(platform: SocialMediaPlatform, url: String) {
+        let newProfile = SocialMediaProfile(platform: platform, profileURL: url)
         socialProfiles.append(newProfile)
     }
     
-    func updateSocialProfile(at index: Int, platform: String, url: String,profileImageName: String, socialMediaIcon: String) {
-        let updatedProfile = SocialMediaProfile(profileImageName: profileImageName, socialMediaIcon: socialMediaIcon, profileURL: url, platform: platform)
+    func updateSocialProfile(at index: Int, platform: SocialMediaPlatform, url: String) {
+        let updatedProfile = SocialMediaProfile(platform: platform, profileURL: url)
         socialProfiles[index] = updatedProfile
     }
     

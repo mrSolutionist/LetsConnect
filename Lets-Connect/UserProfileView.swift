@@ -114,7 +114,7 @@ struct ProfileDetailView: View {
                         HStack {
                             Image(systemName: "circle.fill")
                                 .font(Font.system(size: 5))
-                            Text(profile.platform ?? "nil")
+                            Text(profile.platform.rawValue)
                                 .font(.body)
                         }
                         .listRowBackground(Color.clear)
