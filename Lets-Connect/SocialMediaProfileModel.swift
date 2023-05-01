@@ -32,7 +32,7 @@ enum SocialMediaPlatform : String{
     case LinkedIn = "linkedIn"
     case Youtube = "youtube"
     case Whatsapp = "whatsapp"
-    case Tinder = "tinder"
+    case Twitter = "twitter"
     case StackOverFlow = "stack-overflow"
     case Other = "Other"
 }

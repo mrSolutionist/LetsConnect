@@ -64,7 +64,7 @@ struct EditProfileViewPrimarySection: View {
             Spacer()
         }
         .padding()
-        .background(Color.black)
+        .background(Color("Black"))
     }
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */; };
+		BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */; };
 		BCA7AC7F29FD7E60009BA121 /* Lets_ConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */; };
 		BCA7AC8329FD7E62009BA121 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA7AC8229FD7E62009BA121 /* Assets.xcassets */; };
 		BCA7AC8629FD7E62009BA121 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA7AC8529FD7E62009BA121 /* Preview Assets.xcassets */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
+		BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAccessView.swift; sourceTree = "<group>"; };
 		BCA7AC7B29FD7E60009BA121 /* Lets-Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lets-Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lets_ConnectApp.swift; sourceTree = "<group>"; };
 		BCA7AC8229FD7E62009BA121 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			children = (
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
 				BCA7AC9129FD7E79009BA121 /* ContentView.swift */,
+				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
 				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
 				BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */,
 				BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */,
@@ -170,6 +173,7 @@
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
 				BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */,
+				BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */,
 				BCA7AC7F29FD7E60009BA121 /* Lets_ConnectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,11 +306,13 @@
 				DEVELOPMENT_TEAM = 5S8HZ77935;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access needed for QR Scan";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,11 +337,13 @@
 				DEVELOPMENT_TEAM = 5S8HZ77935;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access needed for QR Scan";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
