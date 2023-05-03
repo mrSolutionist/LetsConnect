@@ -20,6 +20,8 @@
 		BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */; };
 		BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */; };
 		BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */; };
+		BCE645392A00EB120037AC88 /* QRScannerViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCE645382A00EB120037AC88 /* QRScannerViewKit */; };
+		BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,7 @@
 		BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaProfileModel.swift; sourceTree = "<group>"; };
 		BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRcodeView.swift; sourceTree = "<group>"; };
 		BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinksVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCE645392A00EB120037AC88 /* QRScannerViewKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +59,7 @@
 			children = (
 				BCA7AC7D29FD7E60009BA121 /* Lets-Connect */,
 				BCA7AC7C29FD7E60009BA121 /* Products */,
+				BCE645372A00EB120037AC88 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +76,7 @@
 			children = (
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
 				BCA7AC9129FD7E79009BA121 /* ContentView.swift */,
+				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
 				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
 				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
 				BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */,
@@ -94,6 +100,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		BCE645372A00EB120037AC88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,6 +123,9 @@
 			dependencies = (
 			);
 			name = "Lets-Connect";
+			packageProductDependencies = (
+				BCE645382A00EB120037AC88 /* QRScannerViewKit */,
+			);
 			productName = "Lets-Connect";
 			productReference = BCA7AC7B29FD7E60009BA121 /* Lets-Connect.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +154,9 @@
 				Base,
 			);
 			mainGroup = BCA7AC7229FD7E60009BA121;
+			packageReferences = (
+				BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */,
+			);
 			productRefGroup = BCA7AC7C29FD7E60009BA121 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -170,6 +189,7 @@
 				BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */,
 				BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */,
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,
+				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
 				BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */,
@@ -379,6 +399,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mrSolutionist/QRScannerViewKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BCE645382A00EB120037AC88 /* QRScannerViewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */;
+			productName = QRScannerViewKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */ = {

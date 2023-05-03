@@ -11,11 +11,12 @@ import CoreImage
 import SwiftUI
 
 struct QRcodeView: View {
-    let message = "Hello, World!"
+    @EnvironmentObject var userViewModel:  UserProfileViewModel
+//    var message = "Hello, World!"
     
     var body: some View {
         
-        let data = message.data(using: .ascii)
+        let data = userViewModel.selectedProfile.profileURL?.data(using: .ascii)
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
               let colorFilter = CIFilter(name: "CIFalseColor") else {
             return AnyView(Text("Failed to generate QR code"))
@@ -43,5 +44,6 @@ struct QRcodeView: View {
 struct QRcodeView_Previews: PreviewProvider {
     static var previews: some View {
         QRcodeView()
+            .environmentObject(UserProfileViewModel())
     }
 }

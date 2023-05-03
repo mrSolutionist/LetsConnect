@@ -9,7 +9,10 @@ import Foundation
 
 
 class UserProfileViewModel:ObservableObject{
+    @Published var profile : String = String()
     @Published  var activeProfileIndex: Int = 0
+    @Published var addProfile: Bool = false
+    
     var selectedProfile: SocialMediaProfile {
         socialProfiles[activeProfileIndex]
     }
