@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */; };
 		BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */; };
+		BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */; };
 		BCA7AC7F29FD7E60009BA121 /* Lets_ConnectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */; };
 		BCA7AC8329FD7E62009BA121 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA7AC8229FD7E62009BA121 /* Assets.xcassets */; };
 		BCA7AC8629FD7E62009BA121 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA7AC8529FD7E62009BA121 /* Preview Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAccessView.swift; sourceTree = "<group>"; };
+		BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReceivedView.swift; sourceTree = "<group>"; };
 		BCA7AC7B29FD7E60009BA121 /* Lets-Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lets-Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lets_ConnectApp.swift; sourceTree = "<group>"; };
 		BCA7AC8229FD7E62009BA121 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
 				BCA7AC9129FD7E79009BA121 /* ContentView.swift */,
 				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
+				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
 				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
 				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
 				BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */,
@@ -191,6 +194,7 @@
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,
 				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,
+				BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
 				BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */,
 				BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */,
