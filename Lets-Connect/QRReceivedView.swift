@@ -36,26 +36,44 @@ struct  QRReceivedView: View {
                 .background(Color("Black"))
                 .cornerRadius(10)
                 
-
                 Button(action: {
-                    
-                }) {
-                    HStack {
-                        
-                      Text("Open in App")
+                    if let url = URL(string: userViewModel.receivedProfile) {
+                        UIApplication.shared.open(url)
                     }
-                    .padding(.horizontal)
-                    
+                    userViewModel.receivedStatus.toggle()
+                }) {
+                    Text("Open in App")
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, maxHeight: 56)
+                        .background(Color("Primary"))
+                        .foregroundColor(Color("Secondary"))
+                        .buttonStyle(.plain)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("Secondary"), lineWidth: 2)
+                        )
                 }
-                .frame(maxWidth: .infinity, maxHeight: 56)
-                .background(Color("Primary"))
-                .foregroundColor(Color("Secondary"))
-                .buttonStyle(.plain)
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("#8C8C8C"), lineWidth: 2)
-            )
+
+                
+                
+                Button(action: {
+                    userViewModel.receivedStatus.toggle()
+                }) {
+                    Text("Dismiss")
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, maxHeight: 56)
+                        .background(Color("Primary"))
+                        .foregroundColor(Color("Secondary"))
+                        .buttonStyle(.plain)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("Secondary"), lineWidth: 2)
+                        )
+                }
+
+
             }
         
        

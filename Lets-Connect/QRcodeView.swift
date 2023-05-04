@@ -12,7 +12,7 @@ import SwiftUI
 
 struct QRcodeView: View {
     @EnvironmentObject var userViewModel:  UserProfileViewModel
-//    var message = "Hello, World!"
+
     
     var body: some View {
         

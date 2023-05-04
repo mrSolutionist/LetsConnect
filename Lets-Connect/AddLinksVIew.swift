@@ -13,7 +13,7 @@ struct AddLinksView: View {
     @State var activeIndex = 0
     let platforms: [SocialMediaPlatform] = [.Instagram, .Facebook, .LinkedIn, .Youtube, .Whatsapp, .Twitter, .StackOverFlow, .Other]
     @State var url = ""
-
+    
     var body: some View {
         VStack(alignment: .leading,spacing: 16) {
             ScrollView(.horizontal) {
@@ -49,7 +49,29 @@ struct AddLinksView: View {
                 .accentColor(Color("Secondary"))
             
             HStack {
+                Button(action: {
+                    userViewModel.addProfile.toggle()
+                    url.removeAll()
+                }) {
+                    HStack {
+                        Text("Dismiss")
+                            .fontWeight(.regular)
+                            .font(.headline)
+                    }
+                    .padding(.horizontal)
+                    .frame(maxWidth: 140, maxHeight: 40)
+                }
+                .buttonStyle(.bordered)
+                .background(Color("Secondary"))
+                .foregroundColor(Color("Primary"))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color("Secondary"), lineWidth: 2)
+                )
+                
                 Spacer()
+                
                 Button(action: {
                     if let content = UIPasteboard.general.string {
                         url = content
@@ -68,8 +90,8 @@ struct AddLinksView: View {
                             Label("Paste", systemImage: "doc.on.clipboard")
                         } else {
                             Text("Done")
-                                .fontWeight(.heavy)
-                                .font(.subheadline)
+                                .fontWeight(.regular)
+                                .font(.headline)
                         }
                     }
                     .padding(.horizontal)
@@ -82,12 +104,15 @@ struct AddLinksView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("Secondary"), lineWidth: 2)
-            )
+                )
                 
-                Spacer()
+                
+                
+                
             }
-
+            
         }
+        
         .padding()
         .background(Color("Black"))
         .cornerRadius(30)
@@ -100,6 +125,7 @@ struct AddLinksView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
+       
     }
 }
 
