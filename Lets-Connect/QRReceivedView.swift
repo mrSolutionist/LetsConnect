@@ -17,9 +17,9 @@ struct  QRReceivedView: View {
     var body: some View {
         VStack(alignment: .leading,spacing: 16) {
     
-            VStack {
+            VStack(spacing:20) {
                 
-                VStack{
+                VStack(spacing:10){
                     Image(systemName: "checkmark.circle")
                         .fontWeight(.thin)
                     
@@ -29,10 +29,14 @@ struct  QRReceivedView: View {
                         .font(.callout)
                         .foregroundColor(.white)
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
                 .font(.title)
-               
                 .foregroundColor(.green)
-                Spacer()
+                .background(Color("Black"))
+                .cornerRadius(10)
+                
+
                 Button(action: {
                     
                 }) {
@@ -41,27 +45,26 @@ struct  QRReceivedView: View {
                       Text("Open in App")
                     }
                     .padding(.horizontal)
-                    .frame( maxHeight: 56)
+                    
                 }
+                .frame(maxWidth: .infinity, maxHeight: 56)
+                .background(Color("Primary"))
+                .foregroundColor(Color("Secondary"))
+                .buttonStyle(.plain)
+                .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Secondary"), lineWidth: 2)
+                        .stroke(Color("#8C8C8C"), lineWidth: 2)
             )
-                
-                Spacer()
             }
-            .buttonStyle(.bordered)
-            .background(Color("Black"))
-            .foregroundColor(Color("Secondary"))
-            .cornerRadius(10)
+        
        
 
         }
         .padding()
-        .background(Color("Black"))
+        .background(.ultraThinMaterial)
         .cornerRadius(30)
         .padding(32)
-        .shadow(color: .white, radius: 3)
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Nothing to paste"),
