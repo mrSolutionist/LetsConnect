@@ -43,7 +43,7 @@
 //    public var codeHandler: (String) -> Void = { _ in }
 //    public var captureSession: AVCaptureSession!
 //    public var previewLayer: AVCaptureVideoPreviewLayer!
-//
+////    public var metadataObjectType: AVMetadataObject.ObjectType!
 //    public override func viewDidLoad() {
 //        super.viewDidLoad()
 //
@@ -71,7 +71,7 @@
 //            captureSession.addOutput(metadataOutput)
 //
 //            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-//            metadataOutput.metadataObjectTypes = [.qr]
+//            metadataOutput.metadataObjectTypes = [metadataObjectType]
 //        } else {
 //            failed()
 //            return
@@ -81,7 +81,7 @@
 //        previewLayer.frame = view.layer.bounds
 //        previewLayer.videoGravity = .resizeAspectFill
 //        view.layer.addSublayer(previewLayer)
-//       
+//
 //        DispatchQueue.global(qos: .background).async {
 //
 //            // start running captureSession
