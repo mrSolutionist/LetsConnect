@@ -12,7 +12,7 @@ struct UserProfileView: View {
     var body: some View {
         VStack{
             ProfileViewPrimarySection(userViewModel: userViewModel)
-            ProfileDetailView(socialMediaProfile: userViewModel.socialProfiles)
+            ProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
             Spacer()
         }
         .background(.black)
@@ -84,7 +84,7 @@ struct ProfileViewPrimarySection: View {
 }
 
 struct ProfileDetailView: View {
-    var socialMediaProfile : [SocialMediaProfile]
+    var socialMediaProfile : [SocialProfiles]
     var body: some View {
         VStack{
             HStack{
@@ -114,7 +114,7 @@ struct ProfileDetailView: View {
                         HStack {
                             Image(systemName: "circle.fill")
                                 .font(Font.system(size: 5))
-                            Text(profile.platform.rawValue)
+                            Text(profile.platform ?? "Unknown")
                                 .font(.body)
                         }
                         .listRowBackground(Color.clear)

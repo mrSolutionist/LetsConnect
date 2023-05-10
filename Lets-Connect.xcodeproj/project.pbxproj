@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5937802A0A8A0E0034B3EF /* ContentView.swift */; };
 		BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */; };
 		BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */; };
 		BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */; };
@@ -15,7 +16,6 @@
 		BCA7AC8629FD7E62009BA121 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA7AC8529FD7E62009BA121 /* Preview Assets.xcassets */; };
 		BCA7AC8829FD7E62009BA121 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC8729FD7E62009BA121 /* Persistence.swift */; };
 		BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */; };
-		BCA7AC9829FD7E7F009BA121 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9129FD7E79009BA121 /* ContentView.swift */; };
 		BCA7AC9929FD7E7F009BA121 /* EditProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */; };
 		BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9329FD7E7D009BA121 /* UserProfileViewModel.swift */; };
 		BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */; };
@@ -26,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC5937802A0A8A0E0034B3EF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAccessView.swift; sourceTree = "<group>"; };
 		BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReceivedView.swift; sourceTree = "<group>"; };
@@ -35,7 +36,6 @@
 		BCA7AC8529FD7E62009BA121 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BCA7AC8729FD7E62009BA121 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BCA7AC8A29FD7E62009BA121 /* Lets_Connect.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lets_Connect.xcdatamodel; sourceTree = "<group>"; };
-		BCA7AC9129FD7E79009BA121 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../LetsConnect/LetsConnect/ContentView.swift; sourceTree = "<group>"; };
 		BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDetails.swift; sourceTree = "<group>"; };
 		BCA7AC9329FD7E7D009BA121 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMediaProfileModel.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
-				BCA7AC9129FD7E79009BA121 /* ContentView.swift */,
+				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
 				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
 				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
 				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
@@ -188,7 +188,7 @@
 			files = (
 				BCA7AC9929FD7E7F009BA121 /* EditProfileDetails.swift in Sources */,
 				BCA7AC8829FD7E62009BA121 /* Persistence.swift in Sources */,
-				BCA7AC9829FD7E7F009BA121 /* ContentView.swift in Sources */,
+				BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */,
 				BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */,
 				BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */,
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SocialProfiles" representedClassName="SocialProfiles" syncable="YES" codeGenerationType="class">
-        <attribute name="profile" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="platform" optional="YES" attributeType="String"/>
+        <attribute name="profileImageName" optional="YES" attributeType="String"/>
+        <attribute name="profileURL" optional="YES" attributeType="String"/>
+        <attribute name="socialMediaIcon" optional="YES" attributeType="String"/>
     </entity>
 </model>

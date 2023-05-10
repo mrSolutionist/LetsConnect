@@ -12,7 +12,7 @@ struct EditProfileDetails: View {
     var body: some View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
-            EditProfileDetailView(socialMediaProfile: userViewModel.socialProfiles)
+            EditProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
             EditProfileVIewBottomSection()
             Spacer()
         }
@@ -71,7 +71,7 @@ struct EditProfileViewPrimarySection: View {
 
 
 struct EditProfileDetailView: View {
-    var socialMediaProfile : [SocialMediaProfile]
+    var socialMediaProfile : [SocialProfiles]
     @State var userName: String = String()
     @State var email: String = String()
     @State var phoneNumber: String = String()

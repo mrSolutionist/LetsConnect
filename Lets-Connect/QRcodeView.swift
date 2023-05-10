@@ -16,7 +16,7 @@ struct QRcodeView: View {
     
     var body: some View {
         
-        let data = userViewModel.selectedProfile.profileURL?.data(using: .ascii)
+        let data = userViewModel.selectedProfile?.profileURL?.data(using: .ascii) 
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator"),
               let colorFilter = CIFilter(name: "CIFalseColor") else {
             return AnyView(Text("Failed to generate QR code"))
