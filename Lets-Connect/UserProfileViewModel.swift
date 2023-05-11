@@ -51,20 +51,20 @@ class UserProfileViewModel:ObservableObject{
    
     func addSocialProfile(platform: SocialMediaPlatform, url: String) {
         let newProfile = SocialMediaProfile(platform: platform, profileURL: url)
-//        socialProfiles.append(newProfile)
+
         db.addSocialProfileToCoreData(profile: newProfile)
         fetchSocialProfiles()
     }
     
     func updateSocialProfile(platform: SocialMediaPlatform, url: String, oldProfile: SocialProfiles) {
         let updatedProfile = SocialMediaProfile(platform: platform, profileURL: url)
-//        socialProfiles[index] = updatedProfile
         db.updateSocialProfile(newProfile: updatedProfile, oldProfile: oldProfile)
         profileSelectedForUpdate = nil
     }
     
-    func deleteSocialProfile(at index: Int) {
-//        socialProfiles.remove(at: index)
+    func deleteSocialProfile(for profile: SocialProfiles) {
+        db.deleteSocialProfile(profile: profile)
+        fetchSocialProfiles()
         
     }
     

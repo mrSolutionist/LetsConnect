@@ -145,7 +145,7 @@ struct SocialMediaProfiles: View {
     
     
     @ObservedObject var userViewModel: UserProfileViewModel
-
+    @State var confirmDelete:Bool = false
     var body: some View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))], spacing: 20) {
@@ -194,10 +194,19 @@ struct SocialMediaProfiles: View {
                         }
                         Button(action: {
                             // code to handle delete option
+                            confirmDelete.toggle()
                         }) {
                             Label("Delete", systemImage: "trash")
                         }
                     }
+                    .alert(isPresented: $confirmDelete) {
+                                Alert(title: Text("Are you sure you want to delete this profile?"),
+                                      message: Text("This action cannot be undone."),
+                                      primaryButton: .destructive(Text("Delete")) {
+                                    userViewModel.deleteSocialProfile(for: profile)
+                                      },
+                                      secondaryButton: .cancel())
+                            }
                     
                 }
                 
@@ -226,7 +235,9 @@ struct SocialMediaProfiles: View {
             
             
         }
+        .animation(.easeInOut, value: confirmDelete)
         .padding()
+      
     }
 }
 

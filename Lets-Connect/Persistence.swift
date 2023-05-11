@@ -88,6 +88,19 @@ struct DataModel {
     }
 
     
+    func deleteSocialProfile(profile: SocialProfiles) {
+        let context = container.viewContext
+        
+        context.delete(profile)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to delete profile: \(error)")
+        }
+    }
+
+    
     
 
 }
