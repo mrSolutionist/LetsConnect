@@ -17,6 +17,12 @@ struct ContentView: View {
     
     @StateObject var userViewModel: UserProfileViewModel  = UserProfileViewModel()
     
+    var addLinksView: some View {
+        AddLinksView(userViewModel: userViewModel)
+            .offset(y: userViewModel.addProfile ? 0 : UIScreen.main.bounds.height)
+            .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.addProfile)
+    }
+
     
     var body: some View {
         ZStack {
@@ -45,9 +51,7 @@ struct ContentView: View {
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: showQR)
                 .environmentObject(userViewModel)
             
-            AddLinksView(userViewModel: userViewModel)
-                .offset(y: userViewModel.addProfile ? 0 : UIScreen.main.bounds.height)
-                .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.addProfile)
+            addLinksView
             
             QRReceivedView(userViewModel: userViewModel)
                 .offset(y: userViewModel.receivedStatus ? 0 : UIScreen.main.bounds.height)
@@ -183,6 +187,8 @@ struct SocialMediaProfiles: View {
                     }.contextMenu {
                         Button(action: {
                             // code to handle update option
+                            userViewModel.profileSelectedForUpdate = profile
+                            userViewModel.addProfile.toggle()
                         }) {
                             Label("Update", systemImage: "pencil")
                         }

@@ -36,3 +36,30 @@ enum SocialMediaPlatform : String{
     case StackOverFlow = "stack-overflow"
     case Other = "Other"
 }
+
+
+extension SocialMediaPlatform {
+    init?(rawValue: String) {
+        switch rawValue {
+        case "Instagram":
+            self = .Instagram
+        case "Facebook":
+            self = .Facebook
+        case "LinkedIn":
+            self = .LinkedIn
+        case "Youtube":
+            self = .Youtube
+        case "Whatsapp":
+            self = .Whatsapp
+        case "Twitter":
+            self = .Twitter
+        case "StackOverFlow":
+            self = .StackOverFlow
+        case "Other":
+            self = .Other
+        default:
+            return nil
+        }
+    }
+}
+

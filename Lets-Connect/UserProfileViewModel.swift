@@ -22,7 +22,7 @@ class UserProfileViewModel:ObservableObject{
         }
        
     }
-    
+    @Published var profileSelectedForUpdate: SocialProfiles?
     @Published var activeProfileIndex: Int = 0 {
           didSet {
               updateSelectedProfile()
@@ -56,10 +56,11 @@ class UserProfileViewModel:ObservableObject{
         fetchSocialProfiles()
     }
     
-    func updateSocialProfile(at index: Int, platform: SocialMediaPlatform, url: String) {
+    func updateSocialProfile(platform: SocialMediaPlatform, url: String, oldProfile: SocialProfiles) {
         let updatedProfile = SocialMediaProfile(platform: platform, profileURL: url)
 //        socialProfiles[index] = updatedProfile
-        db.updateSocialProfile(profile: updatedProfile)
+        db.updateSocialProfile(newProfile: updatedProfile, oldProfile: oldProfile)
+        profileSelectedForUpdate = nil
     }
     
     func deleteSocialProfile(at index: Int) {

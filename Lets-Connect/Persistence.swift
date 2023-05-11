@@ -49,21 +49,22 @@ struct DataModel {
         }
     }
     
-    func updateSocialProfile(profile: SocialMediaProfile ){
+    func updateSocialProfile(newProfile: SocialMediaProfile , oldProfile: SocialProfiles){
 
         let request = NSFetchRequest<SocialProfiles>(entityName: "SocialProfiles")
 
    
-        request.predicate = NSPredicate(format: "id == %@", profile.id as CVarArg)
+        request.predicate = NSPredicate(format: "id == %@", oldProfile.id!.uuidString )
+
 
         do {
             let results = try container.viewContext.fetch(request)
             if let updatedProfile = results.first {
-                // Update the person's age
-                updatedProfile.platform = profile.platform.rawValue
-                updatedProfile.profileURL = profile.profileURL
-                updatedProfile.profileImageName = profile.profileImageName
-                updatedProfile.socialMediaIcon = profile.socialMediaIcon
+                updatedProfile.id = newProfile.id
+                updatedProfile.platform = newProfile.platform.rawValue
+                updatedProfile.profileURL = newProfile.profileURL
+                updatedProfile.profileImageName = newProfile.profileImageName
+                updatedProfile.socialMediaIcon = newProfile.socialMediaIcon
                 
                 // Save the changes to the context
                 try container.viewContext.save()

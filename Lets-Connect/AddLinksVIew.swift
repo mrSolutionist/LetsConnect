@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddLinksView: View {
     @ObservedObject var userViewModel: UserProfileViewModel
+   
     @State var showAlert = false
     @State var activeIndex = 0
     let platforms: [SocialMediaPlatform] = [.Instagram, .Facebook, .LinkedIn, .Youtube, .Whatsapp, .Twitter, .StackOverFlow, .Other]
@@ -18,6 +19,7 @@ struct AddLinksView: View {
         VStack(alignment: .leading,spacing: 16) {
             ScrollView(.horizontal) {
                 HStack {
+                  
                     ForEach(platforms.indices, id: \.self) { index in
                         Button(action: {
                             activeIndex = index
@@ -47,6 +49,18 @@ struct AddLinksView: View {
                 .background(Color("Primary"))
                 .cornerRadius(10)
                 .accentColor(Color("Secondary"))
+                .onAppear {
+                    if let profile = userViewModel.profileSelectedForUpdate {
+                        url = profile.profileURL!
+                        if let platform = SocialMediaPlatform(rawValue: "Instagram") {
+                            // platform is .Instagram
+                            activeIndex = platforms.firstIndex(of: platform) ?? 0
+                        } else {
+                            // the string does not match any of the enum cases
+                        }
+                       
+                    }
+                }
             
             HStack {
                 Button(action: {
@@ -79,7 +93,11 @@ struct AddLinksView: View {
                     if url.isEmpty {
                         showAlert.toggle()
                     } else {
-                        userViewModel.addSocialProfile(platform: platforms[activeIndex], url: url)
+                        if let oldProfile = userViewModel.profileSelectedForUpdate {
+                            userViewModel.updateSocialProfile(platform: platforms[activeIndex], url: url, oldProfile: oldProfile)
+                        } else {
+                            userViewModel.addSocialProfile(platform: platforms[activeIndex], url: url)
+                        }
                         userViewModel.addProfile.toggle()
                     }
                     url.removeAll()
