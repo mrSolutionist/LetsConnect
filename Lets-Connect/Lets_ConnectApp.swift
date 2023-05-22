@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct Lets_ConnectApp: App {
-    let persistenceController = DataModel.shared
-
+   
+    @StateObject private var authViewModel = AuthServiceViewModel()
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        WindowGroup {       
+            LandingPage()
+                .environmentObject(authViewModel)
         }
     }
 }

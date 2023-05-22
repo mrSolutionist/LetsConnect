@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5937802A0A8A0E0034B3EF /* ContentView.swift */; };
+		BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */; };
+		BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E53312A13AA6B000F66A5 /* LandingPage.swift */; };
+		BC6E53342A13B472000F66A5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E53332A13B472000F66A5 /* AuthViewModel.swift */; };
 		BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */; };
 		BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */; };
 		BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */; };
@@ -23,10 +26,14 @@
 		BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */; };
 		BCE645392A00EB120037AC88 /* QRScannerViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCE645382A00EB120037AC88 /* QRScannerViewKit */; };
 		BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */; };
+		BCF1B1D12A0D691F00431351 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF1B1D02A0D691F00431351 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BC5937802A0A8A0E0034B3EF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		BC6E53312A13AA6B000F66A5 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
+		BC6E53332A13B472000F66A5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAccessView.swift; sourceTree = "<group>"; };
 		BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRReceivedView.swift; sourceTree = "<group>"; };
@@ -42,6 +49,8 @@
 		BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRcodeView.swift; sourceTree = "<group>"; };
 		BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinksVIew.swift; sourceTree = "<group>"; };
+		BCF1B1D02A0D691F00431351 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BCF1B1D22A0D6B3800431351 /* Lets-Connect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lets-Connect.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,9 @@
 		BCA7AC7229FD7E60009BA121 = {
 			isa = PBXGroup;
 			children = (
+				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
+				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
+				BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */,
 				BCA7AC7D29FD7E60009BA121 /* Lets-Connect */,
 				BCA7AC7C29FD7E60009BA121 /* Products */,
 				BCE645372A00EB120037AC88 /* Frameworks */,
@@ -76,8 +88,10 @@
 		BCA7AC7D29FD7E60009BA121 /* Lets-Connect */ = {
 			isa = PBXGroup;
 			children = (
+				BCF1B1D22A0D6B3800431351 /* Lets-Connect.entitlements */,
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
 				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
+				BCF1B1D02A0D691F00431351 /* LoginView.swift */,
 				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
 				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
 				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
@@ -192,8 +206,12 @@
 				BC7A0D0B29FE4CC2001DA997 /* RecentView.swift in Sources */,
 				BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */,
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,
+				BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */,
+				BC6E53342A13B472000F66A5 /* AuthViewModel.swift in Sources */,
 				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,
+				BCF1B1D12A0D691F00431351 /* LoginView.swift in Sources */,
+				BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */,
 				BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
 				BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */,
@@ -324,10 +342,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lets-Connect/Lets-Connect.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Lets-Connect/Preview Content\"";
-				DEVELOPMENT_TEAM = 5S8HZ77935;
+				DEVELOPMENT_TEAM = JVJZXPS8LZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access needed for QR Scan";
@@ -342,7 +361,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.social..Lets-Connect";
+				PRODUCT_BUNDLE_IDENTIFIER = com.letsConnect.social.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -355,10 +374,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lets-Connect/Lets-Connect.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Lets-Connect/Preview Content\"";
-				DEVELOPMENT_TEAM = 5S8HZ77935;
+				DEVELOPMENT_TEAM = JVJZXPS8LZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access needed for QR Scan";
@@ -373,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.social..Lets-Connect";
+				PRODUCT_BUNDLE_IDENTIFIER = com.letsConnect.social.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

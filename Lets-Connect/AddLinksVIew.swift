@@ -49,6 +49,9 @@ struct AddLinksView: View {
                 .background(Color("Primary"))
                 .cornerRadius(10)
                 .accentColor(Color("Secondary"))
+                .onSubmit {
+                                   UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                               }
                 .onAppear {
                     if let profile = userViewModel.profileSelectedForUpdate {
                         url = profile.profileURL!

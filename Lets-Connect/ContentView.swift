@@ -12,9 +12,10 @@ import QRScannerViewKit
 
 
 struct ContentView: View {
+    
+    
     @State var showQR: Bool = false
     @State var showScanner: Bool = false
-    
     @StateObject var userViewModel: UserProfileViewModel  = UserProfileViewModel()
     
     var addLinksView: some View {
@@ -77,7 +78,7 @@ struct ContentView: View {
 struct  HomeViewPrimarySection: View {
     
     @ObservedObject var userViewModel: UserProfileViewModel
-    
+    @EnvironmentObject var authViewModel: AuthServiceViewModel
     
     var body: some View {
         VStack{
@@ -87,42 +88,50 @@ struct  HomeViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    Image((userViewModel.selectedProfile?.profileImageName) ?? "test_image_1")
+                    Image((userViewModel.selectedProfile?.profileImageName) ?? "no_User")
                         .resizable()
                         .scaledToFit()
-                        .background(Color("Secondary"))
                         .clipShape(Circle())
                         .frame(width: 100, height: 100)
-                    Image((userViewModel.selectedProfile?.socialMediaIcon) ?? "test_image_1")
-                    
-                        .resizable()
-                        .scaledToFit()
-                    
-                        .clipShape(Circle())
-                    
-                        .frame(width: 48, height: 48)
-                        .offset(x: 32, y: 32)
+                    if ((userViewModel.selectedProfile?.socialMediaIcon) != nil){
+                        Image((userViewModel.selectedProfile?.socialMediaIcon)!)
+                        
+                            .resizable()
+                            .scaledToFit()
+                        
+                            .clipShape(Circle())
+                        
+                            .frame(width: 48, height: 48)
+                            .offset(x: 32, y: 32)
+                    }
+                   
                 }
                 
                 Spacer()
                 
                 VStack(alignment: .trailing){
-                    ZStack {
-                        Circle()
-                            .stroke(Color("Secondary"), lineWidth: 2)
-                            .frame(width: 48, height: 48)
-                        Image("test_image_1")
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
-                            .frame(width: 48, height: 48)
-                    }
+                    
+                        NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
+                            ZStack {
+                                Circle()
+                                    .stroke(Color("Secondary"), lineWidth: 2)
+                                    .frame(width: 48, height: 48)
+                                Image("add_User")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                                    .frame(width: 48, height: 48)
+                            }
+                        }
+                       
+                        
+                    
                     
                     Group {
-                        Text("Name")
+                        Text(authViewModel.fullName ?? "")
                             .fontWeight(.bold)
                             .font(.headline)
-                        Text(userViewModel.selectedProfile?.platform ?? "test_image_1")
+                        Text(userViewModel.selectedProfile?.platform ?? "NO PROFILE")
                             .textCase(.uppercase)
                             .fontWeight(.heavy)
                             .font(.largeTitle)
@@ -331,7 +340,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             ContentView()
-            
+                .environmentObject(AuthServiceViewModel())
             
             
         }
