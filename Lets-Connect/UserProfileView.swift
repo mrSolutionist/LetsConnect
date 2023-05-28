@@ -71,9 +71,7 @@ struct UserProfileView: View {
                         Text(authViewModel.fullName ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                             .fontWeight(.bold)
-                        Button{
-                            
-                        }label: {
+                        NavigationLink(destination: EditProfileDetails(userViewModel: userViewModel), label: {
                             HStack{
                                 Text("Edit Profile")
                                     .fontWeight(.medium)
@@ -82,8 +80,7 @@ struct UserProfileView: View {
                             }
                             
                             .padding(.horizontal)
-                            
-                        }
+                        })
                         .buttonStyle(.bordered)
                         .background(Color("Primary"))
                         .foregroundColor(Color("Secondary"))

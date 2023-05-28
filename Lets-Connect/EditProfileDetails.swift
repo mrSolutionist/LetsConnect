@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import PhotosUI
 struct EditProfileDetails: View {
     @ObservedObject var userViewModel: UserProfileViewModel
     var body: some View {
@@ -26,6 +26,7 @@ struct EditProfileDetails: View {
 struct EditProfileViewPrimarySection: View {
     @State private var activeProfileIndex: Int? = 0
     @ObservedObject var userViewModel: UserProfileViewModel
+    @State private var pickedImageItem: PhotosPickerItem?
     
     var body: some View {
         HStack {
@@ -41,10 +42,12 @@ struct EditProfileViewPrimarySection: View {
                         .scaledToFit()
                         .clipShape(Circle())
                         .frame(width: 100, height: 100)
-                    Button{
-                        // update profile pic
-                    }label: {
-                        
+                  
+                    
+                }
+                .overlay(alignment: .bottomTrailing){
+                    
+                    PhotosPicker(selection: $pickedImageItem,  matching: .images) {
                         HStack {
                             Image(systemName: "camera")
                                 .foregroundColor(Color("Secondary"))
@@ -54,9 +57,7 @@ struct EditProfileViewPrimarySection: View {
                         }
                         .background(Color("Primary"))
                         .clipShape(Circle())
-                        .frame(width: 48, height: 48)
                     }
-                    .offset(x: 32, y: 32)
                     
                 }
             }
