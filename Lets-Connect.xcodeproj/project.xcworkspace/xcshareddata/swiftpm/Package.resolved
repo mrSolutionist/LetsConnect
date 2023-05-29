@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "qrscannerviewkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mrSolutionist/QRScannerViewKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "662853507c8c1ff0dab298140a969f289d601839"
+      }
+    }
+  ],
+  "version" : 2
+}
