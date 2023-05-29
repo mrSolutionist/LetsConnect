@@ -33,6 +33,8 @@ struct AddLinksView: View {
                                     .scaledToFit()
                                     .clipShape(Circle())
                                     .frame(width: 48, height: 48)
+                                    .opacity(activeIndex == index ? 1 : 0.3)
+                                    .padding(.vertical)
                             }
                         }
                     }
