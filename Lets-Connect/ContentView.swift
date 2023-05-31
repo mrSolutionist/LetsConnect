@@ -88,7 +88,7 @@ struct  HomeViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    Image((userViewModel.selectedProfile?.profileImageName) ?? "no_User")
+                    Image((userViewModel.selectedProfile?.profileImageName) ?? "emptyPersonBlue")
                         .resizable()
                         .scaledToFit()
                         .clipShape(Circle())

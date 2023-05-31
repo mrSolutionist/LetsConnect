@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E963292A24E3C600B82A66 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E963282A24E3C600B82A66 /* SplashScreenView.swift */; };
+		18E9632B2A275A7900B82A66 /* AppleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9632A2A275A7900B82A66 /* AppleSignIn.swift */; };
 		BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5937802A0A8A0E0034B3EF /* ContentView.swift */; };
 		BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */; };
 		BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E53312A13AA6B000F66A5 /* LandingPage.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E963282A24E3C600B82A66 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		18E9632A2A275A7900B82A66 /* AppleSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignIn.swift; sourceTree = "<group>"; };
 		BC5937802A0A8A0E0034B3EF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		BC6E53312A13AA6B000F66A5 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
@@ -65,9 +69,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E963272A24E0D900B82A66 /* AlensContributions */ = {
+			isa = PBXGroup;
+			children = (
+				18E963282A24E3C600B82A66 /* SplashScreenView.swift */,
+				18E9632A2A275A7900B82A66 /* AppleSignIn.swift */,
+			);
+			path = AlensContributions;
+			sourceTree = "<group>";
+		};
 		BCA7AC7229FD7E60009BA121 = {
 			isa = PBXGroup;
 			children = (
+				18E963272A24E0D900B82A66 /* AlensContributions */,
 				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
 				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
 				BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */,
@@ -200,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E9632B2A275A7900B82A66 /* AppleSignIn.swift in Sources */,
 				BCA7AC9929FD7E7F009BA121 /* EditProfileDetails.swift in Sources */,
 				BCA7AC8829FD7E62009BA121 /* Persistence.swift in Sources */,
 				BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */,
@@ -211,6 +226,7 @@
 				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,
 				BCF1B1D12A0D691F00431351 /* LoginView.swift in Sources */,
+				18E963292A24E3C600B82A66 /* SplashScreenView.swift in Sources */,
 				BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */,
 				BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
