@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC4502372A27522100517A9D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4502362A27522100517A9D /* File.swift */; };
 		BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5937802A0A8A0E0034B3EF /* ContentView.swift */; };
 		BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */; };
 		BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E53312A13AA6B000F66A5 /* LandingPage.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC4502362A27522100517A9D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BC5937802A0A8A0E0034B3EF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		BC6E53312A13AA6B000F66A5 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		BCA7AC7229FD7E60009BA121 = {
 			isa = PBXGroup;
 			children = (
+				BC4502362A27522100517A9D /* File.swift */,
 				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
 				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
 				BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */,
@@ -207,6 +210,7 @@
 				BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */,
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,
 				BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */,
+				BC4502372A27522100517A9D /* File.swift in Sources */,
 				BC6E53342A13B472000F66A5 /* AuthViewModel.swift in Sources */,
 				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
 				BCA7AC9E29FD7E7F009BA121 /* UserProfileView.swift in Sources */,

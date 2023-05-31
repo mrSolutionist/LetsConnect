@@ -10,6 +10,7 @@ import SwiftUI
 
 class AuthServiceViewModel: ObservableObject{
     @Published var fullName: String?
+    @Published var loggedUserDetails: LoggedUserDetails?
     @Published var isLoggedIn: Bool = false {
         didSet{
             UserDefaults.standard.set(isLoggedIn, forKey: "isLoggedIn")
