@@ -128,7 +128,7 @@ struct  HomeViewPrimarySection: View {
                     
                     
                     Group {
-                        Text(authViewModel.fullName ?? "")
+                        Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .fontWeight(.bold)
                             .font(.headline)
                         Text(userViewModel.selectedProfile?.platform ?? "NO PROFILE")

@@ -17,7 +17,7 @@ struct UserProfileView: View {
             ProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
             Spacer()
             Button{
-                authViewModel.isLoggedIn = false
+                authViewModel.setLoggedOutStatus()
                 
             }label: {
                 HStack{
@@ -68,7 +68,7 @@ struct UserProfileView: View {
                                 .frame(width: 100, height: 100)
                         }
                         //FIXME: get user data from auth firebase
-                        Text(authViewModel.fullName ?? "Unknown")
+                        Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                             .fontWeight(.bold)
                         NavigationLink(destination: EditProfileDetails(userViewModel: userViewModel), label: {

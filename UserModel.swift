@@ -9,20 +9,22 @@ import Foundation
 
 struct LoggedUserDetails{
     
-    
+    var userId: String?
     var firstName: String? 
     var lastName: String?
     var isLoggedIn: Bool?
-    
+    var fullName: String? {
+            guard let firstName = firstName, let lastName = lastName else {
+                return nil
+            }
+            return [firstName, lastName].compactMap { $0 }.joined(separator: " ")
+        }
     init(user: AppleUser){
+        self.userId = user.userId
         self.firstName = user.firstName
         self.lastName = user.lastName
         self.isLoggedIn =  true
-        
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
-         // Save the user's name to UserDefaults
-         UserDefaults.standard.set(user.firstName, forKey: "firstName")
-         UserDefaults.standard.set(user.lastName, forKey: "lastName")
     }
  
 }

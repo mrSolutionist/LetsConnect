@@ -8,70 +8,65 @@
 import SwiftUI
 import AuthenticationServices
 
+
 struct LoginView: View {
-    //    @State var id: String = ""
     @EnvironmentObject var authViewModel: AuthServiceViewModel
-    
+    @State private var showAlert = false
+
     var body: some View {
-        
-        VStack{
+        VStack {
             Spacer()
-            
+
             SignInWithAppleButton(.signIn) { request in
                 request.requestedScopes = [.fullName]
             } onCompletion: { result in
                 switch result {
                 case .success(let auth):
-                    
                     if let credentials = auth.credential as? ASAuthorizationAppleIDCredential {
                         do {
-                            // Creates a user with the given Credentials
+                           
+
                             if let user = try AppleUser(from: credentials) {
-                                // Create the LoggedUserDetails object and set it in the authViewModel
-                                let loggedUser = LoggedUserDetails(user: user)
-                                authViewModel.loggedUserDetails = loggedUser
-                                do {
-                                    // Encoding to Data to save it in keyChain.
-                                    let userData = try user.encodeToData()
-                                    //                                    self.id = user.userId
-                                    try KeychainWrapper.saveToKeyChain(key: user.userId, data: userData)
-                                    
-                                    
-                                    
-                                } catch let saveError {
-                                    print("Error saving user data to Keychain: \(saveError)")
-                                    // Handle the error appropriately, e.g., display an error message to the user
-                                }
+                                // creating user
+                                authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
+                                let userData = try user.encodeToData()
+                                try KeychainWrapper.saveToKeyChain(key: user.userId, data: userData)
+                                
                             } else {
-                                do {
-                                    if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
-                                        let user = try JSONDecoder().decode(AppleUser.self, from: userData)
-                                        authViewModel.setLoggedInStatus(user: user)
-                                        //                                        self.id = credentials.user
-                                    }
-                                } catch let loadError {
-                                    print("Error loading user data from Keychain: \(loadError)")
-                                    // Handle the error appropriately, e.g., display an error message to the user
+                                if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
+                                    let user = try JSONDecoder().decode(AppleUser.self, from: userData)
+                                    authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
                                 }
                             }
-                        } catch let conversionError {
-                            print("Error creating AppleUser from credentials: \(conversionError)")
-                            // Handle the error appropriately, e.g., display an error message to the user
+                        } catch {
+                            print("Error creating AppleUser from credentials: \(error)")
                         }
                     }
-                    
                 case .failure(let error):
+                    showAlert = true
                     print(error.localizedDescription)
                     // Handle the failure appropriately, e.g., display an error message to the user
                 }
             }
-            
-            .frame(height:45)
+            .frame(height: 45)
             .padding()
-            
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Keychain Save Error"),
+                message: Text("An error occurred while saving user data to the keychain. Please try again."),
+                primaryButton: .default(Text("Retry"), action: {
+                    // Retry the keychain save operation
+                    // You can add any necessary logic here before retrying
+                    retryKeychainSave(userId: self.authViewModel.loggedUserDetails?.userId ?? "")
+                }),
+                secondaryButton: .cancel()
+            )
         }
     }
-    
+    func retryKeychainSave(userId: String){
+        KeychainWrapper.deleteKeychainItem(forKey: userId)
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {
