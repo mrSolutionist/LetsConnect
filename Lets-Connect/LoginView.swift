@@ -29,21 +29,27 @@ struct LoginView: View {
                             if let user = try AppleUser(from: credentials) {
                                 // creating user
                                 authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
+                                
                                 let userData = try user.encodeToData()
+                                // Saving to keyChain
                                 try KeychainWrapper.saveToKeyChain(key: user.userId, data: userData)
                                 
                             } else {
+                                // Retrieving from KeyChain
                                 if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
                                     let user = try JSONDecoder().decode(AppleUser.self, from: userData)
+                                    // creating user
                                     authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
                                 }
                             }
                         } catch {
+                            authViewModel.setLoggedOutStatus()
+                            showAlert = true
                             print("Error creating AppleUser from credentials: \(error)")
                         }
                     }
                 case .failure(let error):
-                    showAlert = true
+                    
                     print(error.localizedDescription)
                     // Handle the failure appropriately, e.g., display an error message to the user
                 }
@@ -58,15 +64,14 @@ struct LoginView: View {
                 primaryButton: .default(Text("Retry"), action: {
                     // Retry the keychain save operation
                     // You can add any necessary logic here before retrying
-                    retryKeychainSave(userId: self.authViewModel.loggedUserDetails?.userId ?? "")
+                    KeychainWrapper.deleteKeychainItem(forKey: self.authViewModel.loggedUserDetails?.userId ?? "")
+                    authViewModel.setLoggedInStatus()
                 }),
                 secondaryButton: .cancel()
             )
         }
     }
-    func retryKeychainSave(userId: String){
-        KeychainWrapper.deleteKeychainItem(forKey: userId)
-    }
+ 
 }
 
 struct LoginView_Previews: PreviewProvider {

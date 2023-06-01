@@ -40,13 +40,7 @@ struct DataModel {
         newProfile.id = profile.id
         newProfile.profileImageName = profile.profileImageName
         newProfile.socialMediaIcon = profile.socialMediaIcon
-        
-        do {
-            try container.viewContext.save()
-            print("New social profile saved to Core Data.")
-        } catch let error {
-            print("Error saving social profile to Core Data: \(error.localizedDescription)")
-        }
+    
     }
     
     func updateSocialProfile(newProfile: SocialMediaProfile , oldProfile: SocialProfiles){
@@ -65,9 +59,6 @@ struct DataModel {
                 updatedProfile.profileURL = newProfile.profileURL
                 updatedProfile.profileImageName = newProfile.profileImageName
                 updatedProfile.socialMediaIcon = newProfile.socialMediaIcon
-                
-                // Save the changes to the context
-                try container.viewContext.save()
             }
         } catch {
             print("Failed to fetch profile: \(error)")
@@ -92,15 +83,76 @@ struct DataModel {
         let context = container.viewContext
         
         context.delete(profile)
+    }
+
+
+    
+    func addUserToCoreData(user: AppleUser) {
+        
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "userId == %@", user.userId)
         
         do {
-            try context.save()
+            let existingUsers = try container.viewContext.fetch(fetchRequest)
+            
+            if let existingUser = existingUsers.first {
+                // User with the same userId already exists, handle the case accordingly
+                print("User with userId \(user.userId) already exists")
+            } else {
+                // User does not exist, create a new user
+                let newUser = UserEntity(context: container.viewContext)
+
+                newUser.userId = user.userId
+                newUser.firstName = user.firstName
+                newUser.lastName = user.lastName
+                newUser.imageData = nil
+             
+               
+            }
         } catch {
-            print("Failed to delete profile: \(error)")
+            print("Error fetching user from Core Data: \(error)")
+        }
+    }
+    
+    func updateUserEntity(userId: String, imageData: Data){
+        
+        let request : NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "userId == %@", userId)
+        
+        do {
+            let results = try container.viewContext.fetch(request)
+            if let updatedUser = results.first {
+                updatedUser.imageData = imageData
+                
+            }
+        } catch {
+            print("Failed to fetch profile: \(error)")
         }
     }
 
+    func fetchUserFromCoreData(userId: String) -> UserEntity? {
+        let request :NSFetchRequest<UserEntity> =  UserEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "userId == %@", userId)
+        
+        do {
+            let result = try container.viewContext.fetch(request)
+            return result.first
+        }
+        catch{
+            print("error fetch user")
+        }
+        return nil
+    }
     
-    
-
+    func saveContext() {
+        let context = container.viewContext
+        
+        do {
+            try context.save()
+            print("Changes saved to Core Data.")
+        } catch {
+            print("Error saving context: \(error)")
+        }
+    }
 }

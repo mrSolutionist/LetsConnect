@@ -7,5 +7,13 @@
         <attribute name="profileImageName" optional="YES" attributeType="String"/>
         <attribute name="profileURL" optional="YES" attributeType="String"/>
         <attribute name="socialMediaIcon" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="socialProfiles" inverseEntity="UserEntity"/>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="String"/>
+        <relationship name="socialProfiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SocialProfiles" inverseName="user" inverseEntity="SocialProfiles"/>
     </entity>
 </model>

@@ -13,11 +13,14 @@ class AuthServiceViewModel: ObservableObject{
     @Published var loggedUserDetails: LoggedUserDetails?
   
     init(){
-        loadUserFromUserDefaults()
+       
+             loadUserFromUserDefaults()
+        
+        
     }
     
     // Set to static to easily access anywhere without passing the object
-    func setLoggedInStatus(user : AppleUser) {
+    func setLoggedInStatus() {
         loggedUserDetails?.isLoggedIn = true
        UserDefaults.standard.set(true, forKey: "isLoggedIn")
       
@@ -25,17 +28,28 @@ class AuthServiceViewModel: ObservableObject{
     
     // Set to static to easily access anywhere without passing the object
     func setLoggedOutStatus() {
-        loggedUserDetails?.isLoggedIn = false
+        loggedUserDetails = nil
         // Set the login status to false in UserDefaults
        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
-    private func loadUserFromUserDefaults() {
-        loggedUserDetails?.isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-      }
+    private func loadUserFromUserDefaults()  {
+        guard let userId = UserDefaults.standard.string(forKey: "currentUser"),
+              UserDefaults.standard.bool(forKey: "isLoggedIn") else {
+            return
+        }
+        
+        if let currentUser =  DataModel.shared.fetchUserFromCoreData(userId: userId) {
+            loggedUserDetails = LoggedUserDetails(user: currentUser)
+        }
+    }
+
+
     
     
- 
+  
+
+    
     
   
 }

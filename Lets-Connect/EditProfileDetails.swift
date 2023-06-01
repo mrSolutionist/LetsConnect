@@ -26,8 +26,7 @@ struct EditProfileDetails: View {
 struct EditProfileViewPrimarySection: View {
     @State private var activeProfileIndex: Int? = 0
     @ObservedObject var userViewModel: UserProfileViewModel
-    @State private var pickedImageItem: PhotosPickerItem?
-    
+   
     var body: some View {
         HStack {
             Spacer()
@@ -37,17 +36,31 @@ struct EditProfileViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    Image("test_image_1")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .frame(width: 100, height: 100)
+                    
+                    switch userViewModel.imageState {
+                    case .success(let image):
+                        image.resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .frame(width: 100, height: 100)
+                    case .loading:
+                        ProgressView()
+                    case .empty:
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white)
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white)
+                    }
+                  
                   
                     
                 }
                 .overlay(alignment: .bottomTrailing){
                     
-                    PhotosPicker(selection: $pickedImageItem,  matching: .images) {
+                    PhotosPicker(selection: $userViewModel.pickedImageItem,  matching: .images) {
                         HStack {
                             Image(systemName: "camera")
                                 .foregroundColor(Color("Secondary"))
