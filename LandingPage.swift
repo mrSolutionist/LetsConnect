@@ -15,7 +15,7 @@ struct LandingPage: View {
     var body: some View {
         NavigationStack {
             VStack{
-                if ((AuthServiceViewModel.loggedUserDetails?.isLoggedIn) != nil) {
+                if ((authViewModel.loggedUserDetails?.isLoggedIn) != nil) {
                     ContentView()
                         .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 } else {

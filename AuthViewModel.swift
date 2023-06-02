@@ -11,7 +11,7 @@ import Combine
 
 class AuthServiceViewModel: ObservableObject {
     // The currently logged-in user details
-    static var loggedUserDetails: LoggedUserDetails?
+    @Published var loggedUserDetails: LoggedUserDetails?
 
     // Set to static to easily access anywhere without passing the object
 
@@ -28,13 +28,13 @@ class AuthServiceViewModel: ObservableObject {
     
     // Set the login status to true
     func setLoggedInStatus() {
-        AuthServiceViewModel.loggedUserDetails?.isLoggedIn = true
+        loggedUserDetails?.isLoggedIn = true
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
     }
     
     // Set the login status to false
     func setLoggedOutStatus() {
-        AuthServiceViewModel.loggedUserDetails = nil
+        loggedUserDetails = nil
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
@@ -48,7 +48,7 @@ class AuthServiceViewModel: ObservableObject {
         }
         
         if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
-            AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: currentUser)
+            loggedUserDetails = LoggedUserDetails(user: currentUser)
         }
     }
     
@@ -68,7 +68,7 @@ class AuthServiceViewModel: ObservableObject {
         }
         
         if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
-            AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: currentUser)
+            loggedUserDetails = LoggedUserDetails(user: currentUser)
         }
     }
 }

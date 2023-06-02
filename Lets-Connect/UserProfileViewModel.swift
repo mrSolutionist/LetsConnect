@@ -69,11 +69,12 @@ class UserProfileViewModel: ObservableObject {
     
     // Data for social profiles
     @Published var dbDataSocialProfiles: [SocialProfiles] = []
+ 
     
     init() {
+        
         updateSelectedProfile()
         fetchSocialProfiles()
-        loadUserImageDataFromLoggedUserDetails()
     }
     
     // Update the selected profile
@@ -145,12 +146,7 @@ class UserProfileViewModel: ObservableObject {
         }
     }
     
-    func loadUserImageDataFromLoggedUserDetails() {
-        guard let data = AuthServiceViewModel.loggedUserDetails?.imageData else{
-            return
-        }
-        self.userImageData = data
-       }
+
    
 
 }

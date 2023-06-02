@@ -9,6 +9,7 @@ import SwiftUI
 import PhotosUI
 struct EditProfileDetails: View {
     @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject  var authViewModel : AuthServiceViewModel
     var body: some View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
@@ -18,7 +19,7 @@ struct EditProfileDetails: View {
         }
         .background(.black)
         .onDisappear {
-            userViewModel.userImageData = AuthServiceViewModel.loggedUserDetails?.imageData
+            userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
                }
         
     }
@@ -149,7 +150,7 @@ struct EditProfileVIewBottomSection: View {
         
         HStack(spacing:40){
             Button{
-                DataModel.shared.updateUserEntity(userId: AuthServiceViewModel.loggedUserDetails?.userId ?? "", imageData: userViewModel.userImageData ?? Data() )
+                DataModel.shared.updateUserEntity(userId: authViewModel.loggedUserDetails?.userId ?? "", imageData: userViewModel.userImageData ?? Data() )
                 DataModel.shared.saveContext()
             }label: {
                 HStack{
@@ -167,7 +168,7 @@ struct EditProfileVIewBottomSection: View {
             .cornerRadius(10)
             
             Button{
-                userViewModel.userImageData = AuthServiceViewModel.loggedUserDetails?.imageData
+                userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
             }label: {
                 HStack{
                     Text("Cancel")

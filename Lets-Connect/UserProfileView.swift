@@ -61,7 +61,7 @@ struct UserProfileView: View {
                             Circle()
                                 .stroke(Color("Secondary"), lineWidth: 2)
                                 .frame(width: 112, height: 112)
-                            AuthServiceViewModel.loggedUserDetails?.showImage()
+                            authViewModel.loggedUserDetails?.showImage()
                                 .resizable()
                                 .scaledToFit()
                                 .clipShape(Circle())
@@ -70,7 +70,7 @@ struct UserProfileView: View {
                                 .frame(width: 110,height: 110)
                         }
                         //FIXME: get user data from auth firebase
-                        Text(AuthServiceViewModel.loggedUserDetails?.fullName ?? "Unknown")
+                        Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                             .fontWeight(.bold)
                         NavigationLink(destination: EditProfileDetails(userViewModel: userViewModel), label: {

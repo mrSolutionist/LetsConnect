@@ -17,6 +17,8 @@ struct ContentView: View {
     @State var showQR: Bool = false
     @State var showScanner: Bool = false
     @StateObject var userViewModel: UserProfileViewModel  = UserProfileViewModel()
+    @EnvironmentObject  var authViewModel : AuthServiceViewModel
+    
     
     var addLinksView: some View {
         AddLinksView(userViewModel: userViewModel)
@@ -67,9 +69,12 @@ struct ContentView: View {
             }
             
         })
-        
+        .onAppear{
+            userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
+        }
         
     }
+        
     
 }
 
@@ -128,7 +133,7 @@ struct  HomeViewPrimarySection: View {
                     
                     
                     Group {
-                        Text(AuthServiceViewModel.loggedUserDetails?.fullName ?? "Unknown")
+                        Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .fontWeight(.bold)
                             .font(.headline)
                         Text(userViewModel.selectedProfile?.platform ?? "NO PROFILE")
