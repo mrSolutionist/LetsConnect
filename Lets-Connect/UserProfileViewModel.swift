@@ -15,7 +15,10 @@ class UserProfileViewModel: ObservableObject {
     
     // Image loading state
     @Published private(set) var imageState: ImageState = .empty
-    
+    @Published var firstName: String = String()
+    @Published var lastName: String = String()
+    @Published var email: String = String()
+    @Published var phoneNumber: String = String()
     enum ImageState {
         case empty
         case loading(Progress)

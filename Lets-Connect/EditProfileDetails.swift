@@ -13,7 +13,7 @@ struct EditProfileDetails: View {
     var body: some View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
-            EditProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
+            EditProfileDetailView(userViewModel: userViewModel)
             EditProfileVIewBottomSection( userViewModel: userViewModel)
             Spacer()
         }
@@ -30,7 +30,7 @@ struct EditProfileDetails: View {
 struct EditProfileViewPrimarySection: View {
     @State private var activeProfileIndex: Int? = 0
     @ObservedObject var userViewModel: UserProfileViewModel
-    
+    @EnvironmentObject  var authViewModel : AuthServiceViewModel
     var body: some View {
         HStack {
             Spacer()
@@ -45,12 +45,15 @@ struct EditProfileViewPrimarySection: View {
                             .resizable()
                             .scaledToFit()
                             .clipShape(Circle())
+                            .padding(5)
                             .frame(width: 110,height: 110)
                     }
                     else{
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.white)
+                        authViewModel.loggedUserDetails?.showImage()
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .frame(width: 110,height: 110)
                     }
               
                   
@@ -84,27 +87,38 @@ struct EditProfileViewPrimarySection: View {
 
 
 struct EditProfileDetailView: View {
-    var socialMediaProfile : [SocialProfiles]
-    @State var userName: String = String()
-    @State var email: String = String()
-    @State var phoneNumber: String = String()
+    @ObservedObject var userViewModel: UserProfileViewModel
+    
     
     var body: some View {
         
         VStack(alignment: .leading,spacing: 16){
             
-                Text("Name")
+                Text("First Name")
                     .foregroundColor(Color("Secondary"))
                     .fontWeight(.bold)
                 HStack{
                     Spacer()
-                    TextField("Name", text: $userName)
+                    TextField("Name", text: $userViewModel.firstName)
                         .foregroundColor(Color("Secondary"))
                     Spacer()
                 }
                 .frame(height: 50)
                 .background(Color("Primary"))
                 .cornerRadius(10)
+            
+            Text("Last Name")
+                .foregroundColor(Color("Secondary"))
+                .fontWeight(.bold)
+            HStack{
+                Spacer()
+                TextField("Name", text: $userViewModel.lastName)
+                    .foregroundColor(Color("Secondary"))
+                Spacer()
+            }
+            .frame(height: 50)
+            .background(Color("Primary"))
+            .cornerRadius(10)
                 
             
             Text("E-mail")
@@ -112,7 +126,7 @@ struct EditProfileDetailView: View {
                 .fontWeight(.bold)
             HStack{
                 Spacer()
-                TextField("email", text: $email)
+                TextField("email", text: $userViewModel.email)
                     .foregroundColor(Color("Secondary"))
                 Spacer()
             }
@@ -126,7 +140,7 @@ struct EditProfileDetailView: View {
                 .fontWeight(.bold)
             HStack{
                 Spacer()
-                TextField("Phone Number", text: $phoneNumber)
+                TextField("Phone Number", text: $userViewModel.phoneNumber)
                     .foregroundColor(Color("Secondary"))
                 Spacer()
             }
@@ -199,5 +213,6 @@ struct EditProfileVIewBottomSection: View {
 struct EditProfileDetails_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileDetails(userViewModel: UserProfileViewModel())
+            .environmentObject(AuthServiceViewModel())
     }
 }

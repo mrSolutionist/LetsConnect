@@ -91,10 +91,12 @@ struct  HomeViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    Image((userViewModel.selectedProfile?.profileImageName) ?? "no_User")
+                    
+                    authViewModel.loggedUserDetails?.showImage()
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                         .clipShape(Circle())
+                        .padding(6)
                         .frame(width: 100, height: 100)
                     if ((userViewModel.selectedProfile?.socialMediaIcon) != nil){
                         Image((userViewModel.selectedProfile?.socialMediaIcon)!)
@@ -117,13 +119,21 @@ struct  HomeViewPrimarySection: View {
                         NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
                             ZStack {
                                 Circle()
+                                
                                     .stroke(Color("Secondary"), lineWidth: 2)
-                                    .frame(width: 48, height: 48)
-                                Image("add_User")
-                                    .resizable()
-                                    .scaledToFit()
+                                    .background(.yellow)
                                     .clipShape(Circle())
                                     .frame(width: 48, height: 48)
+                                    
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    
+                                    .clipShape(Circle())
+                                    .foregroundColor(.white)
+                                    
+                                    .padding(6)
+                                    .frame(width: 48, height: 48)
+                                    
                             }
                         }
                        
