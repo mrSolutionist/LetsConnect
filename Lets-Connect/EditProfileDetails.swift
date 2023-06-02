@@ -13,10 +13,13 @@ struct EditProfileDetails: View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
             EditProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
-            EditProfileVIewBottomSection()
+            EditProfileVIewBottomSection( userViewModel: userViewModel)
             Spacer()
         }
         .background(.black)
+        .onDisappear {
+            userViewModel.userImageData = AuthServiceViewModel.loggedUserDetails?.imageData
+               }
         
     }
 }
@@ -26,7 +29,7 @@ struct EditProfileDetails: View {
 struct EditProfileViewPrimarySection: View {
     @State private var activeProfileIndex: Int? = 0
     @ObservedObject var userViewModel: UserProfileViewModel
-   
+    
     var body: some View {
         HStack {
             Spacer()
@@ -36,24 +39,19 @@ struct EditProfileViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    
-                    switch userViewModel.imageState {
-                    case .success(let image):
-                        image.resizable()
+                    if let data = userViewModel.userImageData, let uiImage = UIImage(data: data){
+                        Image(uiImage: uiImage)
+                            .resizable()
                             .scaledToFit()
                             .clipShape(Circle())
-                            .frame(width: 100, height: 100)
-                    case .loading:
-                        ProgressView()
-                    case .empty:
+                            .frame(width: 110,height: 110)
+                    }
+                    else{
                         Image(systemName: "person.fill")
                             .font(.system(size: 40))
                             .foregroundColor(.white)
-                    case .failure:
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.white)
                     }
+              
                   
                   
                     
@@ -142,7 +140,8 @@ struct EditProfileDetailView: View {
 
 
 struct EditProfileVIewBottomSection: View {
-    
+    @EnvironmentObject  var authViewModel : AuthServiceViewModel
+    @ObservedObject var userViewModel: UserProfileViewModel
     @State var isActiveQR: Bool = false
     @State var showQR: Bool = false
     var body: some View {
@@ -150,7 +149,8 @@ struct EditProfileVIewBottomSection: View {
         
         HStack(spacing:40){
             Button{
-                
+                DataModel.shared.updateUserEntity(userId: AuthServiceViewModel.loggedUserDetails?.userId ?? "", imageData: userViewModel.userImageData ?? Data() )
+                DataModel.shared.saveContext()
             }label: {
                 HStack{
                     Text("Save")
@@ -167,7 +167,7 @@ struct EditProfileVIewBottomSection: View {
             .cornerRadius(10)
             
             Button{
-                
+                userViewModel.userImageData = nil
             }label: {
                 HStack{
                     Text("Cancel")

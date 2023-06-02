@@ -28,22 +28,13 @@ class UserProfileViewModel:ObservableObject{
     @Published var pickedImageItem: PhotosPickerItem? = nil {
         didSet {
             if let pickedImageItem {
-                let progress = loadTransferable(from: pickedImageItem)
-                imageState = .loading(progress)
-            } else {
-                imageState = .empty
+                loadTransferable(from: pickedImageItem)
+                
             }
         }
     }
 
-    @Published var userImageData: Data? {
-        didSet{
-            let uiImage = UIImage(data: userImageData!)
-            
-            self.imageState = .success(Image(uiImage: uiImage!))
-        }
-      
-    }
+    @Published var userImageData: Data?
     
     @Published var receivedProfile: String =  String() {
         didSet {
@@ -70,7 +61,7 @@ class UserProfileViewModel:ObservableObject{
     init() {
         updateSelectedProfile()
         fetchSocialProfiles()
-        
+        loadUserImageDataFromLoggedUserDetails()
     }
     
     private func updateSelectedProfile() {
@@ -117,8 +108,8 @@ class UserProfileViewModel:ObservableObject{
         db.updateUserEntity(userId: userId, imageData: imageData)
     }
     
-    private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
-        return imageSelection.loadTransferable(type: Data.self) { result in
+    private func loadTransferable(from imageSelection: PhotosPickerItem)  {
+        imageSelection.loadTransferable(type: Data.self) { result in
             DispatchQueue.main.async {
                 guard imageSelection == self.pickedImageItem else {
                     print("Failed to get the selected item.")
@@ -140,6 +131,12 @@ class UserProfileViewModel:ObservableObject{
         }
     }
     
-    
+    func loadUserImageDataFromLoggedUserDetails() {
+        guard let data = AuthServiceViewModel.loggedUserDetails?.imageData else{
+            return
+        }
+        self.userImageData = data
+       }
+   
 
 }

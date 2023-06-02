@@ -61,26 +61,16 @@ struct UserProfileView: View {
                             Circle()
                                 .stroke(Color("Secondary"), lineWidth: 2)
                                 .frame(width: 112, height: 112)
-                            switch userViewModel.imageState {
-                            case .success(let image):
-                                image.resizable()
-                                    .scaledToFit()
-                                    .clipShape(Circle())
-                                    .frame(width: 100, height: 100)
-                            case .loading:
-                                ProgressView()
-                            case .empty:
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 40))
-                                    .foregroundColor(.white)
-                            case .failure:
-                                Image(systemName: "exclamationmark.triangle.fill")
-                                    .font(.system(size: 40))
-                                    .foregroundColor(.white)
-                            }
+                            AuthServiceViewModel.loggedUserDetails?.showImage()
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .font(.system(size: 40))
+                                .foregroundColor(.white)
+                                .frame(width: 110,height: 110)
                         }
                         //FIXME: get user data from auth firebase
-                        Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
+                        Text(AuthServiceViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                             .fontWeight(.bold)
                         NavigationLink(destination: EditProfileDetails(userViewModel: userViewModel), label: {

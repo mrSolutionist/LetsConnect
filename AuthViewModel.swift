@@ -7,50 +7,54 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
-class AuthServiceViewModel: ObservableObject{
-   
-    @Published var loggedUserDetails: LoggedUserDetails?
-  
-    init(){
-       
-             loadUserFromUserDefaults()
-        
-        
+class AuthServiceViewModel: ObservableObject {
+    static var loggedUserDetails: LoggedUserDetails?
+
+    private var cancellables: Set<AnyCancellable> = []
+
+    init() {
+        loadUserFromUserDefaults()
+        subscribeToCoreDataChanges()
     }
-    
-    // Set to static to easily access anywhere without passing the object
+
     func setLoggedInStatus() {
-        loggedUserDetails?.isLoggedIn = true
-       UserDefaults.standard.set(true, forKey: "isLoggedIn")
-      
+        AuthServiceViewModel.loggedUserDetails?.isLoggedIn = true
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
     }
-    
-    // Set to static to easily access anywhere without passing the object
+
     func setLoggedOutStatus() {
-        loggedUserDetails = nil
-        // Set the login status to false in UserDefaults
-       UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        AuthServiceViewModel.loggedUserDetails = nil
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
-    
-    private func loadUserFromUserDefaults()  {
+
+    private func loadUserFromUserDefaults() {
         guard let userId = UserDefaults.standard.string(forKey: "currentUser"),
               UserDefaults.standard.bool(forKey: "isLoggedIn") else {
             return
         }
-        
-        if let currentUser =  DataModel.shared.fetchUserFromCoreData(userId: userId) {
-            loggedUserDetails = LoggedUserDetails(user: currentUser)
+
+        if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
+            AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: currentUser)
         }
     }
 
+    private func subscribeToCoreDataChanges() {
+        NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
+            .sink { [weak self] _ in
+                self?.handleCoreDataChanges()
+            }
+            .store(in: &cancellables)
+    }
 
-    
-    
-  
+    private func handleCoreDataChanges() {
+        guard let userId = UserDefaults.standard.string(forKey: "currentUser") else {
+            return
+        }
 
-    
-    
-  
+        if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
+            AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: currentUser)
+        }
+    }
 }
-

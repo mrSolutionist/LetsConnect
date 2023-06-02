@@ -28,7 +28,7 @@ struct LoginView: View {
 
                             if let user = try AppleUser(from: credentials) {
                                 // creating user
-                                authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
+                                AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: user)
                                 
                                 let userData = try user.encodeToData()
                                 // Saving to keyChain
@@ -39,7 +39,7 @@ struct LoginView: View {
                                 if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
                                     let user = try JSONDecoder().decode(AppleUser.self, from: userData)
                                     // creating user
-                                    authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
+                                    AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: user)
                                 }
                             }
                         } catch {
@@ -64,7 +64,7 @@ struct LoginView: View {
                 primaryButton: .default(Text("Retry"), action: {
                     // Retry the keychain save operation
                     // You can add any necessary logic here before retrying
-                    KeychainWrapper.deleteKeychainItem(forKey: self.authViewModel.loggedUserDetails?.userId ?? "")
+                    KeychainWrapper.deleteKeychainItem(forKey: AuthServiceViewModel.loggedUserDetails?.userId ?? "")
                     authViewModel.setLoggedInStatus()
                 }),
                 secondaryButton: .cancel()
