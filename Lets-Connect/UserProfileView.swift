@@ -11,6 +11,7 @@ struct UserProfileView: View {
     @ObservedObject var userViewModel: UserProfileViewModel
     @EnvironmentObject var authViewModel: AuthServiceViewModel
     @Environment (\.dismiss) var dismiss
+    
     var body: some View {
         VStack{
             ProfileViewPrimarySection(userViewModel: userViewModel)
@@ -18,7 +19,7 @@ struct UserProfileView: View {
             Spacer()
             Button{
                 authViewModel.setLoggedOutStatus()
-                
+                dismiss()
             }label: {
                 HStack{
                     Text("LOG OUT")

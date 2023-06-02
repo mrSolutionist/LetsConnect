@@ -75,6 +75,7 @@ class UserProfileViewModel: ObservableObject {
         
         updateSelectedProfile()
         fetchSocialProfiles()
+        loadUserDetails()
     }
     
     // Update the selected profile
@@ -120,6 +121,15 @@ class UserProfileViewModel: ObservableObject {
     // Update user profile image data
     func updateUserProfile(userId: String, imageData: Data) {
         db.updateUserEntity(userId: userId, imageData: imageData)
+    }
+    
+    func loadUserDetails(){
+        guard let userId = UserDefaults.standard.string(forKey: "currentUser")
+        else{
+            return
+        }
+        let user = db.fetchUserFromCoreData(userId: userId)
+        userImageData = user?.imageData
     }
     
     // Load transferable image data from picked item

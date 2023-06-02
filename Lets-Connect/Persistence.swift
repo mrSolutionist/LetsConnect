@@ -31,7 +31,10 @@ struct DataModel {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
     }
+    
+   
     
     func addSocialProfileToCoreData(profile: SocialMediaProfile) {
         let newProfile = SocialProfiles(context: container.viewContext)
@@ -77,6 +80,7 @@ struct DataModel {
             return nil
         }
     }
+
 
     
     func deleteSocialProfile(profile: SocialProfiles) {
@@ -144,6 +148,8 @@ struct DataModel {
         }
         return nil
     }
+    
+ 
     
     func saveContext() {
         let context = container.viewContext

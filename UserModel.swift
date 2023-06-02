@@ -60,14 +60,18 @@ struct LoggedUserDetails {
         // Set login status in UserDefaults
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
         UserDefaults.standard.setValue(user.userId, forKey: "currentUser")
+       
     }
     
     // Show the user's image as an Image view
     func showImage() -> Image {
-        if let data = self.imageData, let uiImage = UIImage(data: data) {
+        if let data = self.imageData ?? (DataModel.shared.fetchUserFromCoreData(userId: userId ?? "")?.imageData),
+           let uiImage = UIImage(data: data) {
             return Image(uiImage: uiImage)
-        } else {
-            return Image(systemName: "person.fill")
         }
+        
+        return Image(systemName: "person.fill")
     }
+
+   
 }

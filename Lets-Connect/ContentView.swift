@@ -69,9 +69,7 @@ struct ContentView: View {
             }
             
         })
-        .onAppear{
-            userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
-        }
+      
         
     }
         
