@@ -167,7 +167,7 @@ struct EditProfileVIewBottomSection: View {
             .cornerRadius(10)
             
             Button{
-                userViewModel.userImageData = nil
+                userViewModel.userImageData = AuthServiceViewModel.loggedUserDetails?.imageData
             }label: {
                 HStack{
                     Text("Cancel")

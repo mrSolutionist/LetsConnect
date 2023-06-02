@@ -8,12 +8,24 @@
 import Foundation
 import SwiftUI
 
+
 struct LoggedUserDetails {
+    // User ID
     var userId: String?
+    
+    // User's first name
     var firstName: String?
+    
+    // User's last name
     var lastName: String?
+    
+    // Flag indicating if the user is logged in
     var isLoggedIn: Bool?
+    
+    // User image data
     var imageData: Data?
+    
+    // User's full name
     var fullName: String? {
         guard let firstName = firstName, let lastName = lastName else {
             return nil
@@ -21,36 +33,41 @@ struct LoggedUserDetails {
         return [firstName, lastName].compactMap { $0 }.joined(separator: " ")
     }
 
+    // Initialize with AppleUser
     init(user: AppleUser) {
         self.userId = user.userId
         self.firstName = user.firstName
         self.lastName = user.lastName
         self.isLoggedIn = true
+        
+        // Set login status in UserDefaults
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
         UserDefaults.standard.setValue(user.userId, forKey: "currentUser")
-        // Saving to CoreData
+        
+        // Save user to CoreData
         DataModel.shared.addUserToCoreData(user: user)
         DataModel.shared.saveContext()
     }
 
+    // Initialize with UserEntity
     init(user: UserEntity) {
         self.userId = user.userId
         self.firstName = user.firstName
         self.lastName = user.lastName
         self.imageData = user.imageData
         self.isLoggedIn = true
+        
+        // Set login status in UserDefaults
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
         UserDefaults.standard.setValue(user.userId, forKey: "currentUser")
-        
     }
     
-    func showImage()  ->  Image{
-        if let data = self.imageData, let uiImage = UIImage(data: data){
+    // Show the user's image as an Image view
+    func showImage() -> Image {
+        if let data = self.imageData, let uiImage = UIImage(data: data) {
             return Image(uiImage: uiImage)
-        }
-        else{
-           return Image(systemName: "person.fill")
-                
+        } else {
+            return Image(systemName: "person.fill")
         }
     }
 }

@@ -9,8 +9,11 @@ import Foundation
 import SwiftUI
 import PhotosUI
 import CoreTransferable
-class UserProfileViewModel:ObservableObject{
+
+class UserProfileViewModel: ObservableObject {
     let db: DataModel = .shared
+    
+    // Image loading state
     @Published private(set) var imageState: ImageState = .empty
     
     enum ImageState {
@@ -24,39 +27,48 @@ class UserProfileViewModel:ObservableObject{
         case importFailed
     }
     
-    
+    // Picked image item
     @Published var pickedImageItem: PhotosPickerItem? = nil {
         didSet {
-            if let pickedImageItem {
+            if let pickedImageItem = pickedImageItem {
                 loadTransferable(from: pickedImageItem)
-                
             }
         }
     }
-
+    
+    // User image data
     @Published var userImageData: Data?
     
-    @Published var receivedProfile: String =  String() {
+    // Profile update status
+    @Published var receivedProfile: String = String() {
         didSet {
             DispatchQueue.main.async {
-                // Call your view update method here
                 self.profileReceivedStatus()
-                
             }
-            
         }
-        
     }
+    
+    // Selected profile for update
     @Published var profileSelectedForUpdate: SocialProfiles?
+    
+    // Active profile index
     @Published var activeProfileIndex: Int = 0 {
         didSet {
             updateSelectedProfile()
         }
     }
     
+    // Selected profile
     var selectedProfile: SocialProfiles?
     
-   
+    // Add profile flag
+    @Published var addProfile: Bool = false
+    
+    // Profile received status flag
+    @Published var receivedStatus: Bool = false
+    
+    // Data for social profiles
+    @Published var dbDataSocialProfiles: [SocialProfiles] = []
     
     init() {
         updateSelectedProfile()
@@ -64,6 +76,7 @@ class UserProfileViewModel:ObservableObject{
         loadUserImageDataFromLoggedUserDetails()
     }
     
+    // Update the selected profile
     private func updateSelectedProfile() {
         guard !dbDataSocialProfiles.isEmpty, dbDataSocialProfiles.indices.contains(activeProfileIndex) else {
             selectedProfile = nil
@@ -72,11 +85,7 @@ class UserProfileViewModel:ObservableObject{
         selectedProfile = dbDataSocialProfiles[activeProfileIndex]
     }
     
-    @Published var addProfile: Bool = false
-    @Published var receivedStatus: Bool = false
-    @Published var dbDataSocialProfiles: [SocialProfiles] = []
-    
-    
+    // Add a social profile
     func addSocialProfile(platform: SocialMediaPlatform, url: String) {
         let newProfile = SocialMediaProfile(platform: platform, profileURL: url)
         
@@ -84,30 +93,35 @@ class UserProfileViewModel:ObservableObject{
         fetchSocialProfiles()
     }
     
+    // Update a social profile
     func updateSocialProfile(platform: SocialMediaPlatform, url: String, oldProfile: SocialProfiles) {
         let updatedProfile = SocialMediaProfile(platform: platform, profileURL: url)
         db.updateSocialProfile(newProfile: updatedProfile, oldProfile: oldProfile)
         profileSelectedForUpdate = nil
     }
     
+    // Delete a social profile
     func deleteSocialProfile(for profile: SocialProfiles) {
         db.deleteSocialProfile(profile: profile)
         fetchSocialProfiles()
-        
     }
     
+    // Toggle received status
     private func profileReceivedStatus() {
         receivedStatus.toggle()
     }
     
-    func fetchSocialProfiles(){
+    // Fetch social profiles
+    func fetchSocialProfiles() {
         dbDataSocialProfiles = db.fetchSocialProfileData() ?? []
     }
     
-    func updateUserProfile(userId: String, imageData: Data){
+    // Update user profile image data
+    func updateUserProfile(userId: String, imageData: Data) {
         db.updateUserEntity(userId: userId, imageData: imageData)
     }
     
+    // Load transferable image data from picked item
     private func loadTransferable(from imageSelection: PhotosPickerItem)  {
         imageSelection.loadTransferable(type: Data.self) { result in
             DispatchQueue.main.async {

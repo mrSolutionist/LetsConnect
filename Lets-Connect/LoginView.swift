@@ -12,7 +12,7 @@ import AuthenticationServices
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthServiceViewModel
     @State private var showAlert = false
-
+   
     var body: some View {
         VStack {
             Spacer()
@@ -33,13 +33,14 @@ struct LoginView: View {
                                 let userData = try user.encodeToData()
                                 // Saving to keyChain
                                 try KeychainWrapper.saveToKeyChain(key: user.userId, data: userData)
-                                
+                          
                             } else {
                                 // Retrieving from KeyChain
                                 if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
                                     let user = try JSONDecoder().decode(AppleUser.self, from: userData)
                                     // creating user
                                     AuthServiceViewModel.loggedUserDetails = LoggedUserDetails(user: user)
+                            
                                 }
                             }
                         } catch {
