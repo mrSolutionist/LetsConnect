@@ -12,21 +12,11 @@ import QRScannerViewKit
 
 
 struct ContentView: View {
-    
-    
     @State var showQR: Bool = false
     @State var showScanner: Bool = false
     @StateObject var userViewModel: UserProfileViewModel  = UserProfileViewModel()
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
-    
-    
-    var addLinksView: some View {
-        AddLinksView(userViewModel: userViewModel)
-            .offset(y: userViewModel.addProfile ? 0 : UIScreen.main.bounds.height)
-            .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.addProfile)
-    }
 
-    
     var body: some View {
         ZStack {
             VStack {
@@ -53,14 +43,16 @@ struct ContentView: View {
             }
             
             QRcode(showQR: $showQR)
-                .offset(y: showQR ? 0 : UIScreen.main.bounds.height * 100)
+                .offset(y: showQR ? 0 : UIScreen.main.bounds.height)
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: showQR)
                 .environmentObject(userViewModel)
             
-            addLinksView
+            AddLinksView(userViewModel: userViewModel)
+                .offset(y: userViewModel.addProfile ? 0 : UIScreen.main.bounds.height)
+                .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.addProfile)
             
             QRReceivedView(userViewModel: userViewModel)
-                .offset(y: userViewModel.receivedStatus ? 0 : UIScreen.main.bounds.height * 100)
+                .offset(y: userViewModel.receivedStatus ? 0 : UIScreen.main.bounds.height)
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.receivedStatus)
             
         }
@@ -93,11 +85,9 @@ struct  HomeViewPrimarySection: View {
         VStack{
             HStack{
                 ZStack {
-                    
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    
                     authViewModel.loggedUserDetails?.showImage()
                         .resizable()
                         .scaledToFill()
@@ -106,12 +96,9 @@ struct  HomeViewPrimarySection: View {
                         .frame(width: 100, height: 100)
                     if ((userViewModel.selectedProfile?.socialMediaIcon) != nil){
                         Image((userViewModel.selectedProfile?.socialMediaIcon)!)
-                        
                             .resizable()
                             .scaledToFit()
-                        
                             .clipShape(Circle())
-                        
                             .frame(width: 48, height: 48)
                             .offset(x: 32, y: 32)
                     }
@@ -125,7 +112,6 @@ struct  HomeViewPrimarySection: View {
                         NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
                             ZStack {
                                 Circle()
-                                
                                     .stroke(Color("Secondary"), lineWidth: 2)
                                     .background(.yellow)
                                     .clipShape(Circle())
@@ -139,13 +125,9 @@ struct  HomeViewPrimarySection: View {
                                     
                                     .padding(6)
                                     .frame(width: 48, height: 48)
-                                    
                             }
                         }
-                       
-                        
-                    
-                    
+
                     Group {
                         Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .fontWeight(.bold)
@@ -170,15 +152,11 @@ struct  HomeViewPrimarySection: View {
 
 
 struct SocialMediaProfiles: View {
-    
-    
     @ObservedObject var userViewModel: UserProfileViewModel
     @State var confirmDelete:Bool = false
     var body: some View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))], spacing: 20) {
-                
-             
                 ForEach(userViewModel.dbDataSocialProfiles.indices, id: \.self) { index in
                     let profile = userViewModel.dbDataSocialProfiles[index]
                     Button{
