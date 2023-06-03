@@ -7,16 +7,21 @@
 
 import SwiftUI
 import AuthenticationServices
-
+import Lottie
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthServiceViewModel
     @State private var showAlert = false
-   
+    @State var animation: LottieAnimationView?
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack {
+            
+            AnimationViewLottie(lottiefile: "HomeAnimation")
+                
+            
             Spacer()
-
+            
             SignInWithAppleButton(.signIn) { request in
                 request.requestedScopes = [.fullName]
             } onCompletion: { result in
@@ -24,8 +29,8 @@ struct LoginView: View {
                 case .success(let auth):
                     if let credentials = auth.credential as? ASAuthorizationAppleIDCredential {
                         do {
-                           
-
+                            
+                            
                             if let user = try AppleUser(from: credentials) {
                                 // creating user
                                 authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
@@ -33,14 +38,14 @@ struct LoginView: View {
                                 let userData = try user.encodeToData()
                                 // Saving to keyChain
                                 try KeychainWrapper.saveToKeyChain(key: user.userId, data: userData)
-                          
+                                
                             } else {
                                 // Retrieving from KeyChain
                                 if let userData = try KeychainWrapper.loadFromKeyChain(key: credentials.user) {
                                     let user = try JSONDecoder().decode(AppleUser.self, from: userData)
                                     // creating user
                                     authViewModel.loggedUserDetails = LoggedUserDetails(user: user)
-                            
+                                    
                                 }
                             }
                         } catch {
@@ -56,8 +61,11 @@ struct LoginView: View {
                 }
             }
             .frame(height: 45)
+            .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
             .padding()
         }
+        .background(.thinMaterial)
+        .background(RadialGradient(gradient: Gradient(colors: [Color.blue, Color.white]), center: .center, startRadius: 0, endRadius: 500))
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Keychain Save Error"),
@@ -71,8 +79,9 @@ struct LoginView: View {
                 secondaryButton: .cancel()
             )
         }
+       
     }
- 
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

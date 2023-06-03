@@ -19,6 +19,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+           
             VStack {
                 HomeViewPrimarySection(userViewModel: userViewModel)
                 SocialMediaProfiles(userViewModel: userViewModel)
@@ -80,7 +81,7 @@ struct  HomeViewPrimarySection: View {
     
     @ObservedObject var userViewModel: UserProfileViewModel
     @EnvironmentObject var authViewModel: AuthServiceViewModel
-    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack{
             HStack{
@@ -88,12 +89,19 @@ struct  HomeViewPrimarySection: View {
                     Circle()
                         .stroke(Color("Secondary"), lineWidth: 2)
                         .frame(width: 112, height: 112)
-                    authViewModel.loggedUserDetails?.showImage()
-                        .resizable()
-                        .scaledToFill()
-                        .clipShape(Circle())
-                        .padding(6)
-                        .frame(width: 100, height: 100)
+                    if let image = authViewModel.loggedUserDetails?.showImage() {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .padding(6)
+                            .frame(width: 100, height: 100)
+                    } else {
+                        AnimationViewLottie(lottiefile: "user")
+                            .clipShape(Circle())
+                            .frame(width: 100, height: 100)
+                    }
+                    
                     if ((userViewModel.selectedProfile?.socialMediaIcon) != nil){
                         Image((userViewModel.selectedProfile?.socialMediaIcon)!)
                             .resizable()
@@ -113,15 +121,13 @@ struct  HomeViewPrimarySection: View {
                             ZStack {
                                 Circle()
                                     .stroke(Color("Secondary"), lineWidth: 2)
-                                    .background(.yellow)
+                                    .background(colorScheme == .dark ? .white : .black)
                                     .clipShape(Circle())
                                     .frame(width: 48, height: 48)
                                     
-                                Image(systemName: "person.fill")
-                                    .resizable()
-                                    
+                                AnimationViewLottie(lottiefile: "userIcon")
                                     .clipShape(Circle())
-                                    .foregroundColor(.white)
+                                    
                                     
                                     .padding(6)
                                     .frame(width: 48, height: 48)

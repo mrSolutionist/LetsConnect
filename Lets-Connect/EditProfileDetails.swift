@@ -45,15 +45,22 @@ struct EditProfileViewPrimarySection: View {
                             .resizable()
                             .scaledToFit()
                             .clipShape(Circle())
-                            .padding(5)
+                            .padding(1)
                             .frame(width: 110,height: 110)
                     }
                     else{
-                        authViewModel.loggedUserDetails?.showImage()
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
-                            .frame(width: 110,height: 110)
+                        if let image = authViewModel.loggedUserDetails?.showImage() {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .clipShape(Circle())
+                                .padding(6)
+                                .frame(width: 100, height: 100)
+                        } else {
+                            AnimationViewLottie(lottiefile: "user")
+                                .clipShape(Circle())
+                                .frame(width: 100, height: 100)
+                        }
                     }
               
                   

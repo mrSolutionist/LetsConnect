@@ -62,13 +62,18 @@ struct UserProfileView: View {
                             Circle()
                                 .stroke(Color("Secondary"), lineWidth: 2)
                                 .frame(width: 112, height: 112)
-                            authViewModel.loggedUserDetails?.showImage()
-                                .resizable()
-                                .scaledToFit()
-                                .clipShape(Circle())
-                                .font(.system(size: 40))
-                                .foregroundColor(.white)
-                                .frame(width: 110,height: 110)
+                            if let image = authViewModel.loggedUserDetails?.showImage() {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipShape(Circle())
+                                    .padding(6)
+                                    .frame(width: 100, height: 100)
+                            } else {
+                                AnimationViewLottie(lottiefile: "user")
+                                    .clipShape(Circle())
+                                    .frame(width: 100, height: 100)
+                            }
                         }
                         //FIXME: get user data from auth firebase
                         Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")

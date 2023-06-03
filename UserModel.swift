@@ -72,13 +72,13 @@ struct LoggedUserDetails {
     }
     
     // Show the user's image as an Image view
-    func showImage() -> Image {
+    func showImage() -> Image? {
         if let data = self.imageData ?? (DataModel.shared.fetchUserFromCoreData()?.imageData),
            let uiImage = UIImage(data: data) {
             return Image(uiImage: uiImage)
         }
         
-        return Image(systemName: "person.fill")
+        return nil
     }
 
    

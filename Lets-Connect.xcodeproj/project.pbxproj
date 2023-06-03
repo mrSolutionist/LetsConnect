@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC060BAB2A2B55D40062E32C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = BC060BAA2A2B55D40062E32C /* Lottie */; };
+		BC060BAD2A2B5D390062E32C /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC060BAC2A2B5D390062E32C /* LottieAnimation.swift */; };
+		BC060BB12A2BA0450062E32C /* HomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = BC060BB02A2BA0450062E32C /* HomeAnimation.json */; };
+		BC060BB52A2BAC060062E32C /* BaseAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = BC060BB42A2BAC060062E32C /* BaseAnimation.json */; };
+		BC060BB72A2BAD5A0062E32C /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = BC060BB62A2BAD5A0062E32C /* user.json */; };
+		BC060BB92A2BB1C70062E32C /* userIcon.json in Resources */ = {isa = PBXBuildFile; fileRef = BC060BB82A2BB1C70062E32C /* userIcon.json */; };
 		BC4502372A27522100517A9D /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4502362A27522100517A9D /* UserModel.swift */; };
 		BC5937812A0A8A0E0034B3EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5937802A0A8A0E0034B3EF /* ContentView.swift */; };
 		BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */; };
@@ -31,6 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC060BAC2A2B5D390062E32C /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
+		BC060BB02A2BA0450062E32C /* HomeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HomeAnimation.json; sourceTree = "<group>"; };
+		BC060BB42A2BAC060062E32C /* BaseAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BaseAnimation.json; sourceTree = "<group>"; };
+		BC060BB62A2BAD5A0062E32C /* user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
+		BC060BB82A2BB1C70062E32C /* userIcon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userIcon.json; sourceTree = "<group>"; };
 		BC4502362A27522100517A9D /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		BC5937802A0A8A0E0034B3EF /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -61,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE645392A00EB120037AC88 /* QRScannerViewKit in Frameworks */,
+				BC060BAB2A2B55D40062E32C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +82,7 @@
 		BCA7AC7229FD7E60009BA121 = {
 			isa = PBXGroup;
 			children = (
+				BC060BAC2A2B5D390062E32C /* LottieAnimation.swift */,
 				BC4502362A27522100517A9D /* UserModel.swift */,
 				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
 				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
@@ -105,6 +118,10 @@
 				BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */,
 				BCA7AC9329FD7E7D009BA121 /* UserProfileViewModel.swift */,
 				BCA7AC8229FD7E62009BA121 /* Assets.xcassets */,
+				BC060BB82A2BB1C70062E32C /* userIcon.json */,
+				BC060BB62A2BAD5A0062E32C /* user.json */,
+				BC060BB42A2BAC060062E32C /* BaseAnimation.json */,
+				BC060BB02A2BA0450062E32C /* HomeAnimation.json */,
 				BCA7AC8729FD7E62009BA121 /* Persistence.swift */,
 				BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */,
 				BCA7AC8429FD7E62009BA121 /* Preview Content */,
@@ -145,6 +162,7 @@
 			name = "Lets-Connect";
 			packageProductDependencies = (
 				BCE645382A00EB120037AC88 /* QRScannerViewKit */,
+				BC060BAA2A2B55D40062E32C /* Lottie */,
 			);
 			productName = "Lets-Connect";
 			productReference = BCA7AC7B29FD7E60009BA121 /* Lets-Connect.app */;
@@ -176,6 +194,7 @@
 			mainGroup = BCA7AC7229FD7E60009BA121;
 			packageReferences = (
 				BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */,
+				BC060BA92A2B55D40062E32C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = BCA7AC7C29FD7E60009BA121 /* Products */;
 			projectDirPath = "";
@@ -192,7 +211,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCA7AC8629FD7E62009BA121 /* Preview Assets.xcassets in Resources */,
+				BC060BB52A2BAC060062E32C /* BaseAnimation.json in Resources */,
 				BCA7AC8329FD7E62009BA121 /* Assets.xcassets in Resources */,
+				BC060BB92A2BB1C70062E32C /* userIcon.json in Resources */,
+				BC060BB12A2BA0450062E32C /* HomeAnimation.json in Resources */,
+				BC060BB72A2BAD5A0062E32C /* user.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +233,7 @@
 				BCA7AC9D29FD7E7F009BA121 /* QRcodeView.swift in Sources */,
 				BCA7AC9A29FD7E7F009BA121 /* UserProfileViewModel.swift in Sources */,
 				BC6E53322A13AA6B000F66A5 /* LandingPage.swift in Sources */,
+				BC060BAD2A2B5D390062E32C /* LottieAnimation.swift in Sources */,
 				BC4502372A27522100517A9D /* UserModel.swift in Sources */,
 				BC6E53342A13B472000F66A5 /* AuthViewModel.swift in Sources */,
 				BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */,
@@ -429,6 +453,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BC060BA92A2B55D40062E32C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mrSolutionist/QRScannerViewKit";
@@ -440,6 +472,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BC060BAA2A2B55D40062E32C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC060BA92A2B55D40062E32C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		BCE645382A00EB120037AC88 /* QRScannerViewKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BCE467DD2A00532D00949425 /* XCRemoteSwiftPackageReference "QRScannerViewKit" */;
