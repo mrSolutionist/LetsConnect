@@ -49,9 +49,6 @@ struct AddLinksView: View {
                 .background(Color("Primary"))
                 .cornerRadius(10)
                 .accentColor(Color("Secondary"))
-                .onSubmit {
-                                   UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                               }
                 .onAppear {
                     if let profile = userViewModel.profileSelectedForUpdate {
                         url = profile.profileURL!
@@ -69,6 +66,7 @@ struct AddLinksView: View {
                 Button(action: {
                     userViewModel.addProfile.toggle()
                     url.removeAll()
+                    userViewModel.dismissKeyboard()
                 }) {
                     HStack {
                         Text("Dismiss")
@@ -104,6 +102,7 @@ struct AddLinksView: View {
                         userViewModel.addProfile.toggle()
                     }
                     url.removeAll()
+                    userViewModel.dismissKeyboard()
                 }) {
                     HStack {
                         
@@ -148,6 +147,8 @@ struct AddLinksView: View {
         }
        
     }
+    
+   
 }
 
 struct AddLinksView_Previews: PreviewProvider {

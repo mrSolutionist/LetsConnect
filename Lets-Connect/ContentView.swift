@@ -45,7 +45,10 @@ struct ContentView: View {
                     userViewModel.receivedStatus = false
                     userViewModel.addProfile = false
                     showQR = false
+                    userViewModel.dismissKeyboard()
                 }
+                
+                
                 
             }
             
@@ -74,7 +77,8 @@ struct ContentView: View {
         }
         
     }
-        
+    
+
     
 }
 

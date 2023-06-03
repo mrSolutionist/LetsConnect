@@ -159,6 +159,7 @@ struct EditProfileVIewBottomSection: View {
     @ObservedObject var userViewModel: UserProfileViewModel
     @State var isActiveQR: Bool = false
     @State var showQR: Bool = false
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         
         
@@ -166,6 +167,7 @@ struct EditProfileVIewBottomSection: View {
             Button{
                 
                 userViewModel.updateUserProfile()
+                dismiss()
             }label: {
                 HStack{
                     Text("Save")
@@ -182,8 +184,9 @@ struct EditProfileVIewBottomSection: View {
             .cornerRadius(10)
             
             Button{
-                userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
-                // reset details aswell
+                dismiss()
+                userViewModel.dismissKeyboard()
+                
             }label: {
                 HStack{
                     Text("Cancel")
