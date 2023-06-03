@@ -43,6 +43,7 @@ struct DataModel {
         newProfile.id = profile.id
         newProfile.profileImageName = profile.profileImageName
         newProfile.socialMediaIcon = profile.socialMediaIcon
+        saveContext()
     
     }
     
@@ -62,6 +63,8 @@ struct DataModel {
                 updatedProfile.profileURL = newProfile.profileURL
                 updatedProfile.profileImageName = newProfile.profileImageName
                 updatedProfile.socialMediaIcon = newProfile.socialMediaIcon
+                
+                saveContext()
             }
         } catch {
             print("Failed to fetch profile: \(error)")
@@ -87,6 +90,7 @@ struct DataModel {
         let context = container.viewContext
         
         context.delete(profile)
+        saveContext()
     }
 
 
@@ -100,7 +104,7 @@ struct DataModel {
         do {
             let existingUsers = try container.viewContext.fetch(fetchRequest)
             
-            if let existingUser = existingUsers.first {
+            if let _ = existingUsers.first {
                 // User with the same userId already exists, handle the case accordingly
                 print("User with userId \(user.userId) already exists")
             } else {
@@ -111,7 +115,7 @@ struct DataModel {
                 newUser.firstName = user.firstName
                 newUser.lastName = user.lastName
                 newUser.imageData = nil
-             
+                saveContext()
                
             }
         } catch {
@@ -119,8 +123,10 @@ struct DataModel {
         }
     }
     
-    func updateUserEntity(userId: String, imageData: Data){
-        
+    func updateUserEntity( firstName: String, lastName:String, phNumber:String, imageData: Data, email: String) {
+        guard let userId: String =  UserDefaults.standard.string(forKey: "currentUser") else {
+            return
+        }
         let request : NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
         request.predicate = NSPredicate(format: "userId == %@", userId)
         
@@ -128,14 +134,21 @@ struct DataModel {
             let results = try container.viewContext.fetch(request)
             if let updatedUser = results.first {
                 updatedUser.imageData = imageData
-                
+                updatedUser.firstName = firstName
+                updatedUser.lastName = lastName
+                updatedUser.phoneNumber = phNumber
+                updatedUser.email = email
+                saveContext()
             }
         } catch {
             print("Failed to fetch profile: \(error)")
         }
     }
 
-    func fetchUserFromCoreData(userId: String) -> UserEntity? {
+    func fetchUserFromCoreData() -> UserEntity? {
+        guard let userId: String =  UserDefaults.standard.string(forKey: "currentUser") else {
+            return nil
+        }
         let request :NSFetchRequest<UserEntity> =  UserEntity.fetchRequest()
         request.predicate = NSPredicate(format: "userId == %@", userId)
         
@@ -147,6 +160,8 @@ struct DataModel {
             print("error fetch user")
         }
         return nil
+        
+        
     }
     
  

@@ -106,12 +106,13 @@ struct UserProfileView: View {
         }
         
         struct ProfileDetailView: View {
+            @EnvironmentObject var authViewModel: AuthServiceViewModel
             var socialMediaProfile : [SocialProfiles]
             var body: some View {
                 VStack{
                     HStack{
                         Spacer()
-                        Text("Email id")
+                        Text(authViewModel.loggedUserDetails?.email ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                         Spacer()
                     }
@@ -121,7 +122,7 @@ struct UserProfileView: View {
                     .padding()
                     HStack{
                         Spacer()
-                        Text("Phone Number")
+                        Text(authViewModel.loggedUserDetails?.phoneNumber ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                         Spacer()
                     }

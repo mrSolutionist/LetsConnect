@@ -25,6 +25,12 @@ struct LoggedUserDetails {
     // User image data
     var imageData: Data?
     
+    // User email
+    var email: String?
+    
+    // User phoneNumber
+    var phoneNumber: String?
+    
     // User's full name
     var fullName: String? {
         guard let firstName = firstName, let lastName = lastName else {
@@ -55,6 +61,8 @@ struct LoggedUserDetails {
         self.firstName = user.firstName
         self.lastName = user.lastName
         self.imageData = user.imageData
+        self.email = user.email
+        self.phoneNumber = user.phoneNumber
         self.isLoggedIn = true
         
         // Set login status in UserDefaults
@@ -65,7 +73,7 @@ struct LoggedUserDetails {
     
     // Show the user's image as an Image view
     func showImage() -> Image {
-        if let data = self.imageData ?? (DataModel.shared.fetchUserFromCoreData(userId: userId ?? "")?.imageData),
+        if let data = self.imageData ?? (DataModel.shared.fetchUserFromCoreData()?.imageData),
            let uiImage = UIImage(data: data) {
             return Image(uiImage: uiImage)
         }

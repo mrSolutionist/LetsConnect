@@ -164,8 +164,8 @@ struct EditProfileVIewBottomSection: View {
         
         HStack(spacing:40){
             Button{
-                DataModel.shared.updateUserEntity(userId: authViewModel.loggedUserDetails?.userId ?? "", imageData: userViewModel.userImageData ?? Data() )
-                DataModel.shared.saveContext()
+                
+                userViewModel.updateUserProfile()
             }label: {
                 HStack{
                     Text("Save")
@@ -183,6 +183,7 @@ struct EditProfileVIewBottomSection: View {
             
             Button{
                 userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
+                // reset details aswell
             }label: {
                 HStack{
                     Text("Cancel")

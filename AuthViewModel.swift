@@ -41,19 +41,18 @@ class AuthServiceViewModel: ObservableObject {
     // MARK: - Private Methods
     
     // Load the user details from UserDefaults and update the loggedUserDetails
-    private func loadUserFromUserDefaults() {
-        guard let userId = UserDefaults.standard.string(forKey: "currentUser"),
-              UserDefaults.standard.bool(forKey: "isLoggedIn") else {
+     func loadUserFromUserDefaults() {
+        guard UserDefaults.standard.bool(forKey: "isLoggedIn") else {
             return
         }
         
-        if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
+        if let currentUser = DataModel.shared.fetchUserFromCoreData() {
             loggedUserDetails = LoggedUserDetails(user: currentUser)
         }
     }
     
     // Subscribe to Core Data changes using NotificationCenter
-     func subscribeToCoreDataChanges() {
+    private func subscribeToCoreDataChanges() {
         NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
             .sink { [weak self] _ in
                 self?.handleCoreDataChanges()
@@ -63,11 +62,8 @@ class AuthServiceViewModel: ObservableObject {
     
     // Handle Core Data changes and update the loggedUserDetails if necessary
     private func handleCoreDataChanges() {
-        guard let userId = UserDefaults.standard.string(forKey: "currentUser") else {
-            return
-        }
-        
-        if let currentUser = DataModel.shared.fetchUserFromCoreData(userId: userId) {
+
+        if let currentUser = DataModel.shared.fetchUserFromCoreData() {
             loggedUserDetails = LoggedUserDetails(user: currentUser)
         }
     }

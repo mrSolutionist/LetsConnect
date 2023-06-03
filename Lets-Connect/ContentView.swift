@@ -69,7 +69,9 @@ struct ContentView: View {
             }
             
         })
-      
+        .onAppear{
+            authViewModel.loadUserFromUserDefaults()
+        }
         
     }
         
