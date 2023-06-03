@@ -50,14 +50,14 @@ struct ContentView: View {
             }
             
             QRcode(showQR: $showQR)
-                .offset(y: showQR ? 0 : UIScreen.main.bounds.height)
+                .offset(y: showQR ? 0 : UIScreen.main.bounds.height * 100)
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: showQR)
                 .environmentObject(userViewModel)
             
             addLinksView
             
             QRReceivedView(userViewModel: userViewModel)
-                .offset(y: userViewModel.receivedStatus ? 0 : UIScreen.main.bounds.height)
+                .offset(y: userViewModel.receivedStatus ? 0 : UIScreen.main.bounds.height * 100)
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.receivedStatus)
             
         }
