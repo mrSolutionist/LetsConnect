@@ -25,7 +25,7 @@ struct ContentView: View {
                 SocialMediaProfiles(userViewModel: userViewModel)
                 
                 Spacer()
-                HomeVIewBottomSection(showScanner: $showScanner, showQR: $showQR)
+                HomeViewBottomSection(showScanner: $showScanner, showQR: $showQR)
             }
             .background(Color("Black"))
             .blur(radius: userViewModel.receivedStatus || showQR || showScanner || userViewModel.addProfile ? 0.7 : 0)
@@ -253,22 +253,19 @@ struct SocialMediaProfiles: View {
     }
 }
 
-struct HomeVIewBottomSection: View {
-    
-    @State var isActiveQR: Bool = false
+struct HomeViewBottomSection: View {
+    @State private var isActiveQR: Bool = false
     @Binding var showScanner: Bool
     @Binding var showQR: Bool
+    @State private var isShowingNFCAlert: Bool = false
     
     var body: some View {
-        
-        VStack{
-            HStack(spacing:40){
-                Button{
+        VStack {
+            HStack(spacing: 40) {
+                Button {
                     showScanner.toggle()
-                    
-                    
-                }label: {
-                    HStack{
+                } label: {
+                    HStack {
                         Text("QR")
                             .fontWeight(.heavy)
                             .font(.title)
@@ -276,8 +273,6 @@ struct HomeVIewBottomSection: View {
                             .fontWeight(.heavy)
                             .font(.subheadline)
                     }
-                    
-                    
                     .padding(.horizontal)
                 }
                 .buttonStyle(.bordered)
@@ -285,10 +280,12 @@ struct HomeVIewBottomSection: View {
                 .foregroundColor(Color("Primary"))
                 .cornerRadius(10)
                 
-                Button{
-                    showQR.toggle()
-                }label: {
-                    HStack{
+                Button {
+                    
+                        showQR.toggle()
+                   
+                } label: {
+                    HStack {
                         Text("QR")
                             .fontWeight(.heavy)
                             .font(.title)
@@ -296,9 +293,7 @@ struct HomeVIewBottomSection: View {
                             .fontWeight(.heavy)
                             .font(.subheadline)
                     }
-                    
                     .padding(.horizontal)
-                    
                 }
                 .buttonStyle(.bordered)
                 .background(Color("Primary"))
@@ -308,19 +303,13 @@ struct HomeVIewBottomSection: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("Secondary"), lineWidth: 2)
                 )
-                
-                
-                
-                
-                
             }
             .buttonStyle(.borderedProminent)
-            
             
             HStack(alignment: .center) {
                 Spacer()
                 Text("QR")
-                Toggle(isOn: $isActiveQR) {
+                Toggle(isOn: $isShowingNFCAlert) {
                     EmptyView()
                 }
                 .toggleStyle(SwitchToggleStyle(tint: Color.red))
@@ -334,10 +323,18 @@ struct HomeVIewBottomSection: View {
         .padding()
         .fontWeight(.heavy)
         .background(Color("Primary"))
-        
-        
+        .alert(isPresented: $isShowingNFCAlert) {
+            Alert(
+                title: Text("NFC Feature"),
+                message: Text("The NFC feature is currently in testing. We will roll out the feature in the upcoming update."),
+                dismissButton: .default(Text("OK")) {
+                    isActiveQR = true
+                }
+            )
+        }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
