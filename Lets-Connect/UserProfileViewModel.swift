@@ -145,19 +145,31 @@ class UserProfileViewModel: ObservableObject {
         imageSelection.loadTransferable(type: Data.self) { result in
             DispatchQueue.main.async {
                 guard imageSelection == self.pickedImageItem else {
+#if DEBUG
                     print("Failed to get the selected item.")
+#endif
+                   
                     return
                 }
+#if DEBUG
                 print(result)
+#endif
+                
                 switch result {
                 case .success(let data?):
                     self.userImageData = data
                     // Handle the case where profileImage is not nil
                 case .success(nil):
+#if DEBUG
                     print("Profile image is nil")
+#endif
+                    
                     // Handle the case where profileImage is nil
                 case .failure(let error):
+#if DEBUG
                     print(error)
+#endif
+                   
                     // Handle the failure case
                 }
             }

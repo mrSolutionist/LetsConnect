@@ -67,6 +67,9 @@ struct DataModel {
                 saveContext()
             }
         } catch {
+#if DEBUG
+
+#endif
             print("Failed to fetch profile: \(error)")
         }
 
@@ -79,7 +82,10 @@ struct DataModel {
             let data = try container.viewContext.fetch(fetchRequest)
             return data
         } catch {
+#if DEBUG
             print("Could not fetch data: \(error.localizedDescription)")
+#endif
+           
             return nil
         }
     }
@@ -105,6 +111,9 @@ struct DataModel {
             let existingUsers = try container.viewContext.fetch(fetchRequest)
             
             if let _ = existingUsers.first {
+#if DEBUG
+
+#endif
                 // User with the same userId already exists, handle the case accordingly
                 print("User with userId \(user.userId) already exists")
             } else {
@@ -119,7 +128,10 @@ struct DataModel {
                
             }
         } catch {
+#if DEBUG
             print("Error fetching user from Core Data: \(error)")
+#endif
+            
         }
     }
     
@@ -141,7 +153,10 @@ struct DataModel {
                 saveContext()
             }
         } catch {
+#if DEBUG
             print("Failed to fetch profile: \(error)")
+#endif
+           
         }
     }
 
@@ -157,7 +172,10 @@ struct DataModel {
             return result.first
         }
         catch{
+#if DEBUG
             print("error fetch user")
+#endif
+           
         }
         return nil
         
@@ -171,9 +189,15 @@ struct DataModel {
         
         do {
             try context.save()
+#if DEBUG
             print("Changes saved to Core Data.")
+#endif
+            
         } catch {
+#if DEBUG
             print("Error saving context: \(error)")
+#endif
+           
         }
     }
 }

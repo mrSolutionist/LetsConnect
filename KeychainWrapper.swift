@@ -27,7 +27,11 @@ struct KeychainWrapper{
           
         }
         else{
+#if DEBUG
             print("saved to keychain")
+#endif
+
+            
         }
     }
     
@@ -62,11 +66,20 @@ struct KeychainWrapper{
         let status = SecItemDelete(query as CFDictionary)
         
         if status == errSecSuccess {
+#if DEBUG
             print("Keychain item deleted successfully.")
+#endif
+            
         } else if let error = SecCopyErrorMessageString(status, nil) {
+#if DEBUG
             print("Error deleting Keychain item: \(error)")
+#endif
+           
         } else {
+#if DEBUG
             print("Unknown error deleting Keychain item.")
+#endif
+            
         }
     }
 }

@@ -51,12 +51,17 @@ struct LoginView: View {
                         } catch {
                             authViewModel.setLoggedOutStatus()
                             showAlert = true
+#if DEBUG
                             print("Error creating AppleUser from credentials: \(error)")
+#endif
+                            
                         }
                     }
                 case .failure(let error):
-                    
+#if DEBUG
                     print(error.localizedDescription)
+#endif
+                    
                     // Handle the failure appropriately, e.g., display an error message to the user
                 }
             }
