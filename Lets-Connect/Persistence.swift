@@ -34,7 +34,7 @@ struct DataModel {
         
     }
     
-   
+    
     
     func addSocialProfileToCoreData(profile: SocialMediaProfile) {
         let newProfile = SocialProfiles(context: container.viewContext)
@@ -44,17 +44,17 @@ struct DataModel {
         newProfile.profileImageName = profile.profileImageName
         newProfile.socialMediaIcon = profile.socialMediaIcon
         saveContext()
-    
+        
     }
     
     func updateSocialProfile(newProfile: SocialMediaProfile , oldProfile: SocialProfiles){
-
+        
         let request = NSFetchRequest<SocialProfiles>(entityName: "SocialProfiles")
-
-   
+        
+        
         request.predicate = NSPredicate(format: "id == %@", oldProfile.id!.uuidString )
-
-
+        
+        
         do {
             let results = try container.viewContext.fetch(request)
             if let updatedProfile = results.first {
@@ -68,13 +68,13 @@ struct DataModel {
             }
         } catch {
 #if DEBUG
-
+            
 #endif
             print("Failed to fetch profile: \(error)")
         }
-
+        
     }
-
+    
     func fetchSocialProfileData() -> [SocialProfiles]? {
         let fetchRequest = NSFetchRequest<SocialProfiles>(entityName: "SocialProfiles")
         
@@ -85,12 +85,12 @@ struct DataModel {
 #if DEBUG
             print("Could not fetch data: \(error.localizedDescription)")
 #endif
-           
+            
             return nil
         }
     }
-
-
+    
+    
     
     func deleteSocialProfile(profile: SocialProfiles) {
         let context = container.viewContext
@@ -98,10 +98,33 @@ struct DataModel {
         context.delete(profile)
         saveContext()
     }
-
-
     
-    func addUserToCoreData(user: AppleUser) {
+    func deleteUserEntityFromCoreData(userId: String) -> Bool {
+       
+        let request : NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "userId == %@", userId)
+        do {
+            let user = try container.viewContext.fetch(request)
+            
+            if let user = user.first{
+                container.viewContext.delete(user)
+                return true
+            }
+#if DEBUG
+            print("deleted user from core data")
+#endif
+           
+        } catch {
+            
+#if DEBUG
+            print("Failed to fetch profile: \(error)")
+#endif
+            return false
+        }
+        return false
+    }
+    
+    func addUserEntityToCoreData(user: AppleUser) {
         
         
         let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
@@ -112,20 +135,20 @@ struct DataModel {
             
             if let _ = existingUsers.first {
 #if DEBUG
-
-#endif
                 // User with the same userId already exists, handle the case accordingly
                 print("User with userId \(user.userId) already exists")
+#endif
+                
             } else {
                 // User does not exist, create a new user
                 let newUser = UserEntity(context: container.viewContext)
-
+                
                 newUser.userId = user.userId
                 newUser.firstName = user.firstName
                 newUser.lastName = user.lastName
                 newUser.imageData = nil
                 saveContext()
-               
+                
             }
         } catch {
 #if DEBUG
@@ -135,7 +158,16 @@ struct DataModel {
         }
     }
     
-    func updateUserEntity( firstName: String, lastName:String, phNumber:String, imageData: Data, email: String) {
+    func addTempUserEntityToCoreData(userId: String) {
+        
+        // User does not exist, create a new user
+        let newUser = UserEntity(context: container.viewContext)
+        newUser.userId = userId
+        saveContext()
+        
+    }
+    
+    func updateUserEntity( firstName: String, lastName:String, phNumber:String, imageData: Data?, email: String) {
         guard let userId: String =  UserDefaults.standard.string(forKey: "currentUser") else {
             return
         }
@@ -156,10 +188,10 @@ struct DataModel {
 #if DEBUG
             print("Failed to fetch profile: \(error)")
 #endif
-           
+            
         }
     }
-
+    
     func fetchUserFromCoreData() -> UserEntity? {
         guard let userId: String =  UserDefaults.standard.string(forKey: "currentUser") else {
             return nil
@@ -175,14 +207,14 @@ struct DataModel {
 #if DEBUG
             print("error fetch user")
 #endif
-           
+            
         }
         return nil
         
         
     }
     
- 
+    
     
     func saveContext() {
         let context = container.viewContext
@@ -197,7 +229,7 @@ struct DataModel {
 #if DEBUG
             print("Error saving context: \(error)")
 #endif
-           
+            
         }
     }
 }

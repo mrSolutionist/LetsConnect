@@ -51,7 +51,7 @@ struct LoggedUserDetails {
         UserDefaults.standard.setValue(user.userId, forKey: "currentUser")
         
         // Save user to CoreData
-        DataModel.shared.addUserToCoreData(user: user)
+        DataModel.shared.addUserEntityToCoreData(user: user)
         DataModel.shared.saveContext()
     }
 
@@ -70,6 +70,16 @@ struct LoggedUserDetails {
         UserDefaults.standard.setValue(user.userId, forKey: "currentUser")
        
     }
+    
+    // Initialize without a user
+     init() {
+         self.userId = UUID().uuidString
+         self.isLoggedIn = true
+         UserDefaults.standard.set(true, forKey: "isLoggedIn")
+         UserDefaults.standard.setValue(userId, forKey: "currentUser")
+         DataModel.shared.addTempUserEntityToCoreData(userId: userId ?? "")
+         DataModel.shared.saveContext()
+     }
     
     // Show the user's image as an Image view
     func showImage() -> Image? {

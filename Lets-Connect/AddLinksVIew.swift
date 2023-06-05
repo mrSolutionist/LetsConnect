@@ -87,44 +87,60 @@ struct AddLinksView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    if let content = UIPasteboard.general.string {
-                        url = content
-                    }
+                VStack {
                     if url.isEmpty {
-                        showAlert.toggle()
-                    } else {
-                        if let oldProfile = userViewModel.profileSelectedForUpdate {
-                            userViewModel.updateSocialProfile(platform: platforms[activeIndex], url: url, oldProfile: oldProfile)
-                        } else {
-                            userViewModel.addSocialProfile(platform: platforms[activeIndex], url: url)
+                        Button(action: {
+                            if let content = UIPasteboard.general.string {
+                                url = content
+                            }
+                            if url.isEmpty {
+                                showAlert.toggle()
+                            }
+                        }) {
+                            HStack {
+                                Label("Paste", systemImage: "doc.on.clipboard")
+                                
+                            }
+                            .padding(.horizontal)
+                            .frame(maxWidth: 140, maxHeight: 40)
+                            .buttonStyle(.bordered)
+                            .background(Color("Black"))
+                            .foregroundColor(Color("Secondary"))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color("Secondary"), lineWidth: 2)
+                            )
                         }
-                        userViewModel.addProfile.toggle()
-                    }
-                    url.removeAll()
-                    userViewModel.dismissKeyboard()
-                }) {
-                    HStack {
-                        
-                        if url.isEmpty {
-                            Label("Paste", systemImage: "doc.on.clipboard")
-                        } else {
+                    } else {
+                        Button(action: {
+                            if let oldProfile = userViewModel.profileSelectedForUpdate {
+                                userViewModel.updateSocialProfile(platform: platforms[activeIndex], url: url, oldProfile: oldProfile)
+                            } else {
+                                userViewModel.addSocialProfile(platform: platforms[activeIndex], url: url)
+                            }
+                            url.removeAll()
+                            userViewModel.addProfile.toggle()
+                            userViewModel.dismissKeyboard()
+                        }) {
                             Text("Done")
                                 .fontWeight(.regular)
                                 .font(.headline)
+                                .padding(.horizontal)
+                                .frame(maxWidth: 140, maxHeight: 40)
+                                .buttonStyle(.bordered)
+                                .background(Color("Black"))
+                                .foregroundColor(Color("Secondary"))
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("Secondary"), lineWidth: 2)
+                                )
                         }
                     }
-                    .padding(.horizontal)
-                    .frame(maxWidth: 140, maxHeight: 40)
                 }
-                .buttonStyle(.bordered)
-                .background(Color("Black"))
-                .foregroundColor(Color("Secondary"))
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Secondary"), lineWidth: 2)
-                )
+
+
                 
                 
                 

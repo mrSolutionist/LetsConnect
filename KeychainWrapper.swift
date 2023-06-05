@@ -57,7 +57,7 @@ struct KeychainWrapper{
     }
     
     
-    static func deleteKeychainItem(forKey key: String) {
+    static func deleteUserFromKeychain(forKey key: String) -> Bool{
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
@@ -69,20 +69,25 @@ struct KeychainWrapper{
 #if DEBUG
             print("Keychain item deleted successfully.")
 #endif
+            return true
             
         } else if let error = SecCopyErrorMessageString(status, nil) {
 #if DEBUG
             print("Error deleting Keychain item: \(error)")
 #endif
-           
+           return false
         } else {
 #if DEBUG
             print("Unknown error deleting Keychain item.")
 #endif
-            
+            return false
         }
+       
     }
+    
 }
 enum KeychainError: Error {
       case unhandledError(status: OSStatus)
   }
+
+

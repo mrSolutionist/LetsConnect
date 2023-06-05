@@ -14,7 +14,7 @@ struct EditProfileDetails: View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
             EditProfileDetailView(userViewModel: userViewModel)
-            EditProfileVIewBottomSection( userViewModel: userViewModel)
+            EditProfileViewBottomSection( userViewModel: userViewModel)
             Spacer()
         }
         .background(.black)
@@ -161,7 +161,7 @@ struct EditProfileDetailView: View {
 }
 
 
-struct EditProfileVIewBottomSection: View {
+struct EditProfileViewBottomSection: View {
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
     @ObservedObject var userViewModel: UserProfileViewModel
     @State var isActiveQR: Bool = false

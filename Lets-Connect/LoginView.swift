@@ -16,7 +16,7 @@ struct LoginView: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack {
-            
+          
             AnimationViewLottie(lottiefile: "HomeAnimation")
                 
             
@@ -68,6 +68,27 @@ struct LoginView: View {
             .frame(height: 45)
             .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
             .padding()
+            
+            Button {
+                authViewModel.loggedUserDetails = LoggedUserDetails()
+            } label: {
+                HStack {
+                   Spacer()
+                    Image(systemName: "theatermasks.fill")
+                    Text("Skip Login")
+                        .fontWeight(.heavy)
+                        .font(.subheadline)
+                    Spacer()
+                }
+               
+            }
+            .padding(10)
+            .buttonStyle(.borderless)
+            .background(colorScheme == .dark ? .white : .black)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .cornerRadius(5)
+            .padding()
+           
         }
         .background(.thinMaterial)
         .background(RadialGradient(gradient: Gradient(colors: [Color.blue, Color.white]), center: .center, startRadius: 0, endRadius: 500))
@@ -78,7 +99,7 @@ struct LoginView: View {
                 primaryButton: .default(Text("Retry"), action: {
                     // Retry the keychain save operation
                     // You can add any necessary logic here before retrying
-                    KeychainWrapper.deleteKeychainItem(forKey: authViewModel.loggedUserDetails?.userId ?? "")
+                    KeychainWrapper.deleteUserFromKeychain(forKey: authViewModel.loggedUserDetails?.userId ?? "")
                     authViewModel.setLoggedInStatus()
                 }),
                 secondaryButton: .cancel()

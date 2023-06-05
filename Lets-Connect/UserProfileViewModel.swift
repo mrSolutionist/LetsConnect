@@ -123,14 +123,27 @@ class UserProfileViewModel: ObservableObject {
     
     // Update user profile image data
     func updateUserProfile() {
-        guard let data  = userImageData else {
-            return
-        }
         
-        db.updateUserEntity(firstName: firstName, lastName: lastName, phNumber: phoneNumber, imageData: data, email: email)
+            db.updateUserEntity(firstName: firstName, lastName: lastName, phNumber: phoneNumber, imageData: userImageData, email: email)
+       
         loadUserDetails()
     }
+
     
+    func deleteUserFromApp(completion: @escaping (Bool) -> Void) {
+        if let userId = UserDefaults.standard.string(forKey: "currentUser") {
+            if db.deleteUserEntityFromCoreData(userId: userId) {
+                UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                UserDefaults.standard.removeObject(forKey: "currentUser")
+                completion(true) // Notify the completion handler that the user deletion was successful
+            } else {
+                completion(false) // Notify the completion handler that the user deletion failed
+            }
+        } else {
+            completion(false) // Notify the completion handler that the user is not logged in
+        }
+    }
+
     func loadUserDetails(){
         let user = db.fetchUserFromCoreData()
         userImageData = user?.imageData
