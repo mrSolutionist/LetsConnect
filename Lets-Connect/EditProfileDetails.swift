@@ -29,11 +29,12 @@ struct EditProfileDetails: View {
                 DeleteUserButton(userViewModel: userViewModel)
                 Spacer()
             }
-            .background(.black)
-            .onDisappear {
-                userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
+         
         }
-        }
+        .background(.black)
+        .onDisappear {
+            userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
+    }
         
     }
 }
