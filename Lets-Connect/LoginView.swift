@@ -99,8 +99,10 @@ struct LoginView: View {
                 primaryButton: .default(Text("Retry"), action: {
                     // Retry the keychain save operation
                     // You can add any necessary logic here before retrying
-                    KeychainWrapper.deleteUserFromKeychain(forKey: authViewModel.loggedUserDetails?.userId ?? "")
-                    authViewModel.setLoggedInStatus()
+                    if KeychainWrapper.deleteUserFromKeychain(forKey: authViewModel.loggedUserDetails?.userId ?? "") {
+                        authViewModel.setLoggedInStatus()
+                    }
+                    
                 }),
                 secondaryButton: .cancel()
             )
