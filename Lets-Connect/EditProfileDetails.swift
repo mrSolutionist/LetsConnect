@@ -10,11 +10,22 @@ import PhotosUI
 struct EditProfileDetails: View {
     @ObservedObject var userViewModel: UserProfileViewModel
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
+    @Environment(\.dismiss) var dismiss
+    @State private var showAlert = false
+
     var body: some View {
         VStack{
             EditProfileViewPrimarySection(userViewModel: userViewModel)
             EditProfileDetailView(userViewModel: userViewModel)
             EditProfileViewBottomSection( userViewModel: userViewModel)
+       
+            Divider()
+               
+            HStack {
+                Text("OR")
+            }
+            .foregroundColor(.white)
+            DeleteUserButton(userViewModel: userViewModel)
             Spacer()
         }
         .background(.black)
@@ -217,6 +228,61 @@ struct EditProfileViewBottomSection: View {
         .buttonStyle(.borderedProminent)
         .padding()
         
+    }
+}
+
+
+struct DeleteUserButton: View {
+    @EnvironmentObject  var authViewModel : AuthServiceViewModel
+    @ObservedObject var userViewModel: UserProfileViewModel
+    @Environment(\.dismiss) var dismiss
+    
+    @State private var showAlert = false
+    @State private var showErrorAlert = false
+    
+    var body: some View {
+        Button {
+            showAlert = true
+        } label: {
+            HStack {
+                Text("Delete User")
+                    .fontWeight(.heavy)
+                    .font(.title)
+            }
+            .padding(.horizontal)
+        }
+        .buttonStyle(.bordered)
+        .foregroundColor(Color("Secondary"))
+        .buttonBorderShape(.roundedRectangle)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color("Secondary"), lineWidth: 2)
+        )
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Delete User"),
+                message: Text("Are you sure you want to delete the user?"),
+                primaryButton: .destructive(Text("Delete")) {
+                    userViewModel.deleteUserFromApp { status in
+                        switch status {
+                        case true:
+                            authViewModel.loggedUserDetails = nil
+                            dismiss()
+                        case false:
+                            showErrorAlert = true
+                        }
+                    }
+                },
+                secondaryButton: .cancel()
+            )
+        }
+        .alert(isPresented: $showErrorAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text("An error occurred while deleting the user."),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

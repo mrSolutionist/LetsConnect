@@ -147,10 +147,10 @@ class UserProfileViewModel: ObservableObject {
     func loadUserDetails(){
         let user = db.fetchUserFromCoreData()
         userImageData = user?.imageData
-        firstName = user?.firstName ?? "No Data"
-        lastName = user?.lastName  ?? "No Data"
-        phoneNumber = user?.phoneNumber  ?? "No Data"
-        email = user?.email ?? "No Data"
+        firstName = user?.firstName ?? "firstName"
+        lastName = user?.lastName  ?? "lastName"
+        phoneNumber = user?.phoneNumber  ?? "phoneNumber"
+        email = user?.email ?? "email"
     }
     
     // Load transferable image data from picked item

@@ -36,36 +36,7 @@ struct UserProfileView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color("Secondary"), lineWidth: 2)
             )
-            Spacer()
-            Button{
-                userViewModel.deleteUserFromApp { status in
-                    switch status{
-                        
-                    case true:
-                        authViewModel.loggedUserDetails = nil
-                        dismiss()
-                    case false:
-                        // show alert
-                        break
-                    }
-                }
-                
-            }label: {
-                HStack{
-                    Text("Delete User")
-                        .fontWeight(.heavy)
-                        .font(.title)
-                }
-                .padding(.horizontal)
-                
-            }
-            .buttonStyle(.bordered)
-            .foregroundColor(Color("Secondary"))
-            .buttonBorderShape(.roundedRectangle)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color("Secondary"), lineWidth: 2)
-            )
+       
 
         }
         .background(.black)
