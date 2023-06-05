@@ -14,24 +14,26 @@ struct EditProfileDetails: View {
     @State private var showAlert = false
 
     var body: some View {
-        VStack{
-            EditProfileViewPrimarySection(userViewModel: userViewModel)
-            EditProfileDetailView(userViewModel: userViewModel)
-            EditProfileViewBottomSection( userViewModel: userViewModel)
-       
-            Divider()
-               
-            HStack {
-                Text("OR")
+        ScrollView {
+            VStack{
+                EditProfileViewPrimarySection(userViewModel: userViewModel)
+                EditProfileDetailView(userViewModel: userViewModel)
+                EditProfileViewBottomSection( userViewModel: userViewModel)
+           
+                Divider()
+                   
+                HStack {
+                    Text("OR")
+                }
+                .foregroundColor(.white)
+                DeleteUserButton(userViewModel: userViewModel)
+                Spacer()
             }
-            .foregroundColor(.white)
-            DeleteUserButton(userViewModel: userViewModel)
-            Spacer()
+            .background(.black)
+            .onDisappear {
+                userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
         }
-        .background(.black)
-        .onDisappear {
-            userViewModel.userImageData = authViewModel.loggedUserDetails?.imageData
-               }
+        }
         
     }
 }
