@@ -27,7 +27,17 @@ struct QRcodeView: View {
         colorFilter.setValue(CIColor.clear, forKey: "inputColor1")
         guard let outputImage = colorFilter.outputImage,
               let cgImage = CIContext().createCGImage(outputImage, from: outputImage.extent) else {
-            return AnyView(Text("Failed to generate QR code"))
+            return AnyView(VStack(alignment: .leading){
+             
+                Text("No profile Selected")
+                Text("Create a profile by clicking on the + button and add a url ")
+                Text("example: www.google.com")
+                    .fontWeight(.bold)
+                Text("Select the profile that u want to share.")
+                Text("A QR will appear after selecting a profile")
+               
+            }.frame(minWidth: 200,minHeight: 200)
+                .background(.white))
         }
         let uiImage = UIImage(cgImage: cgImage)
         return AnyView(Image(uiImage: uiImage)

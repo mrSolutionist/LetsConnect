@@ -85,7 +85,7 @@ class UserProfileViewModel: ObservableObject {
     private func updateSelectedProfile() {
         guard !dbDataSocialProfiles.isEmpty, dbDataSocialProfiles.indices.contains(activeProfileIndex) else {
             selectedProfile = nil
-            return
+            return 
         }
         selectedProfile = dbDataSocialProfiles[activeProfileIndex]
     }
