@@ -15,6 +15,22 @@ struct AddLinksView: View {
     let platforms: [SocialMediaPlatform] = [.Instagram, .Facebook, .LinkedIn, .Youtube, .Whatsapp, .Twitter, .StackOverFlow, .Other]
     @State var url = ""
     
+//    var modifiedURL : String {
+//        return addHTTPSPrefix(to: url)
+//    }
+    
+    func modifiedURL(platform: SocialMediaPlatform) -> String {
+        var modifiedURL = url
+        
+        if platform == .Whatsapp {
+            modifiedURL = "https://api.whatsapp.com/send/?phone=\(modifiedURL)&text&type=phone_number&app_absent=0"
+        } else {
+            modifiedURL =  addHTTPSPrefix(to: url)
+        }
+        
+        return modifiedURL
+    }
+    
     var body: some View {
         VStack(alignment: .leading,spacing: 16) {
             ScrollView(.horizontal) {
@@ -114,10 +130,12 @@ struct AddLinksView: View {
                         }
                     } else {
                         Button(action: {
+                            // Updating Profile
                             if let oldProfile = userViewModel.profileSelectedForUpdate {
-                                userViewModel.updateSocialProfile(platform: platforms[activeIndex], url: url, oldProfile: oldProfile)
+                                userViewModel.updateSocialProfile(platform: platforms[activeIndex], url: modifiedURL(platform: platforms[activeIndex]), oldProfile: oldProfile)
                             } else {
-                                userViewModel.addSocialProfile(platform: platforms[activeIndex], url: url)
+                                // Creating new Profile
+                                userViewModel.addSocialProfile(platform: platforms[activeIndex], url: modifiedURL(platform: platforms[activeIndex]))
                             }
                             url.removeAll()
                             userViewModel.addProfile.toggle()
@@ -164,7 +182,14 @@ struct AddLinksView: View {
        
     }
     
-   
+   private func addHTTPSPrefix(to urlString: String) -> String {
+        var modifiedURLString = urlString
+        if !modifiedURLString.hasPrefix("https://") && !modifiedURLString.hasPrefix("http://") {
+            modifiedURLString = "https://" + modifiedURLString
+        }
+        return modifiedURLString
+    }
+
 }
 
 struct AddLinksView_Previews: PreviewProvider {
