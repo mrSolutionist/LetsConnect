@@ -58,6 +58,8 @@ class UserProfileViewModel: ObservableObject {
     @Published var activeProfileIndex: Int = 0 {
         didSet {
             updateSelectedProfile()
+            UserDefaults.standard.setValue(activeProfileIndex, forKey: "DefaultProfile")
+            
         }
     }
     
@@ -75,10 +77,10 @@ class UserProfileViewModel: ObservableObject {
  
     
     init() {
-        
-        updateSelectedProfile()
+       
         fetchSocialProfiles()
         loadUserDetails()
+        activeProfileIndex =  UserDefaults.standard.integer(forKey: "DefaultProfile")
     }
     
     // Update the selected profile

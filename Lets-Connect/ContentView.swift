@@ -167,6 +167,7 @@ struct SocialMediaProfiles: View {
                     let profile = userViewModel.dbDataSocialProfiles[index]
                     Button{
                         userViewModel.activeProfileIndex = index
+                        
                     }label: {
                         ZStack {
                             Circle()
