@@ -82,11 +82,6 @@
 		BCA7AC7229FD7E60009BA121 = {
 			isa = PBXGroup;
 			children = (
-				BC060BAC2A2B5D390062E32C /* LottieAnimation.swift */,
-				BC4502362A27522100517A9D /* UserModel.swift */,
-				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
-				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
-				BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */,
 				BCA7AC7D29FD7E60009BA121 /* Lets-Connect */,
 				BCA7AC7C29FD7E60009BA121 /* Products */,
 				BCE645372A00EB120037AC88 /* Frameworks */,
@@ -106,23 +101,12 @@
 			children = (
 				BCF1B1D22A0D6B3800431351 /* Lets-Connect.entitlements */,
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
-				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
-				BCF1B1D02A0D691F00431351 /* LoginView.swift */,
-				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
-				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
-				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
-				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
-				BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */,
-				BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */,
-				BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */,
-				BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */,
-				BCA7AC9329FD7E7D009BA121 /* UserProfileViewModel.swift */,
+				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
+				BCFC34342A3B3AF500747EFF /* CoreDataFiles */,
+				BCFC34332A3B3A5A00747EFF /* HelperFile */,
+				BCFC342F2A3B39B500747EFF /* LoginView */,
+				BCFC34302A3B39E200747EFF /* HomeView */,
 				BCA7AC8229FD7E62009BA121 /* Assets.xcassets */,
-				BC060BB82A2BB1C70062E32C /* userIcon.json */,
-				BC060BB62A2BAD5A0062E32C /* user.json */,
-				BC060BB42A2BAC060062E32C /* BaseAnimation.json */,
-				BC060BB02A2BA0450062E32C /* HomeAnimation.json */,
-				BCA7AC8729FD7E62009BA121 /* Persistence.swift */,
 				BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */,
 				BCA7AC8429FD7E62009BA121 /* Preview Content */,
 			);
@@ -142,6 +126,78 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BCFC342F2A3B39B500747EFF /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				BC6E53332A13B472000F66A5 /* AuthViewModel.swift */,
+				BCF1B1D02A0D691F00431351 /* LoginView.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		BCFC34302A3B39E200747EFF /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
+				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
+				BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */,
+				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
+				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
+				BCFC34322A3B3A3000747EFF /* SocialProfile */,
+				BCFC34312A3B39FA00747EFF /* UserView */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		BCFC34312A3B39FA00747EFF /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				BC4502362A27522100517A9D /* UserModel.swift */,
+				BCA7AC9329FD7E7D009BA121 /* UserProfileViewModel.swift */,
+				BCA7AC9729FD7E7F009BA121 /* UserProfileView.swift */,
+				BCA7AC9229FD7E7C009BA121 /* EditProfileDetails.swift */,
+			);
+			path = UserView;
+			sourceTree = "<group>";
+		};
+		BCFC34322A3B3A3000747EFF /* SocialProfile */ = {
+			isa = PBXGroup;
+			children = (
+				BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */,
+				BCA7AC9529FD7E7D009BA121 /* SocialMediaProfileModel.swift */,
+			);
+			path = SocialProfile;
+			sourceTree = "<group>";
+		};
+		BCFC34332A3B3A5A00747EFF /* HelperFile */ = {
+			isa = PBXGroup;
+			children = (
+				BCFC34352A3B3B1500747EFF /* AnimationFiles */,
+				BC060BAC2A2B5D390062E32C /* LottieAnimation.swift */,
+				BC6E532D2A135C77000F66A5 /* KeychainWrapper.swift */,
+			);
+			path = HelperFile;
+			sourceTree = "<group>";
+		};
+		BCFC34342A3B3AF500747EFF /* CoreDataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				BCA7AC8729FD7E62009BA121 /* Persistence.swift */,
+			);
+			path = CoreDataFiles;
+			sourceTree = "<group>";
+		};
+		BCFC34352A3B3B1500747EFF /* AnimationFiles */ = {
+			isa = PBXGroup;
+			children = (
+				BC060BB82A2BB1C70062E32C /* userIcon.json */,
+				BC060BB42A2BAC060062E32C /* BaseAnimation.json */,
+				BC060BB02A2BA0450062E32C /* HomeAnimation.json */,
+				BC060BB62A2BAD5A0062E32C /* user.json */,
+			);
+			path = AnimationFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
