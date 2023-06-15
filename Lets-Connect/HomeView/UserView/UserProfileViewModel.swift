@@ -191,6 +191,38 @@ class UserProfileViewModel: ObservableObject {
         }
     }
     
+    func reset() {
+        // Image loading state
+        imageState = .empty
+ 
+        // Picked image item
+       pickedImageItem = nil
+        
+        // User image data
+        userImageData = nil
+
+        // Selected profile for update
+        profileSelectedForUpdate = nil
+        
+        // Active profile index
+       activeProfileIndex = 0
+        
+        // Selected profile
+        selectedProfile = nil
+        
+        // Add profile flag
+       addProfile = false
+        
+        // Profile received status flag
+       receivedStatus = false
+        
+        // Data for social profiles
+        dbDataSocialProfiles = []
+        firstName = String()
+     lastName = String()
+       email = String()
+       phoneNumber = String()
+       }
 
      func dismissKeyboard() {
              UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

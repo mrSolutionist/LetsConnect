@@ -14,15 +14,15 @@ import QRScannerViewKit
 struct ContentView: View {
     @State var showQR: Bool = false
     @State var showScanner: Bool = false
-    @StateObject var userViewModel: UserProfileViewModel  = UserProfileViewModel()
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
 
     var body: some View {
         ZStack {
            
             VStack {
-                HomeViewPrimarySection(userViewModel: userViewModel)
-                SocialMediaProfiles(userViewModel: userViewModel)
+                HomeViewPrimarySection()
+                SocialMediaProfiles()
                 
                 Spacer()
                 HomeViewBottomSection(showScanner: $showScanner, showQR: $showQR)
@@ -57,6 +57,9 @@ struct ContentView: View {
                 .animation(.spring(response: 0.7, dampingFraction: 0.6), value: userViewModel.receivedStatus)
             
         }
+        .onAppear{
+            userViewModel.fetchSocialProfiles()
+        }
         
         .fullScreenCover(isPresented: $showScanner, content: {
             QRScannerView{
@@ -79,8 +82,9 @@ struct ContentView: View {
 
 struct  HomeViewPrimarySection: View {
     
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @EnvironmentObject var authViewModel: AuthServiceViewModel
+    @EnvironmentObject var navigationRoute: NavigationRouteViewModel
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack{
@@ -116,23 +120,25 @@ struct  HomeViewPrimarySection: View {
                 Spacer()
                 
                 VStack(alignment: .trailing){
-                    
-                        NavigationLink(destination: UserProfileView(userViewModel: userViewModel)) {
-                            ZStack {
-                                Circle()
-                                    .stroke(Color("Secondary"), lineWidth: 2)
-                                    .background(colorScheme == .dark ? .white : .black)
-                                    .clipShape(Circle())
-                                    .frame(width: 48, height: 48)
-                                    
-                                AnimationViewLottie(lottiefile: "userIcon")
-                                    .clipShape(Circle())
-                                    
-                                    
-                                    .padding(6)
-                                    .frame(width: 48, height: 48)
-                            }
+                    Button{
+                        navigationRoute.pushView(route: .Profile)
+                    }label: {
+                        ZStack {
+                            Circle()
+                                .stroke(Color("Secondary"), lineWidth: 2)
+                                .background(colorScheme == .dark ? .white : .black)
+                                .clipShape(Circle())
+                                .frame(width: 48, height: 48)
+                                
+                            AnimationViewLottie(lottiefile: "userIcon")
+                                .clipShape(Circle())
+                                
+                                
+                                .padding(6)
+                                .frame(width: 48, height: 48)
                         }
+                    }
+                    
 
                     Group {
                         Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
@@ -158,7 +164,7 @@ struct  HomeViewPrimarySection: View {
 
 
 struct SocialMediaProfiles: View {
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @State var confirmDelete:Bool = false
     var body: some View {
         ScrollView{

@@ -34,6 +34,7 @@
 		BCE645392A00EB120037AC88 /* QRScannerViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = BCE645382A00EB120037AC88 /* QRScannerViewKit */; };
 		BCE6453B2A0149430037AC88 /* AddLinksVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */; };
 		BCF1B1D12A0D691F00431351 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF1B1D02A0D691F00431351 /* LoginView.swift */; };
+		BCFC34382A3B554E00747EFF /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFC34372A3B554E00747EFF /* NavigationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		BCE6453A2A0149420037AC88 /* AddLinksVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinksVIew.swift; sourceTree = "<group>"; };
 		BCF1B1D02A0D691F00431351 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BCF1B1D22A0D6B3800431351 /* Lets-Connect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lets-Connect.entitlements"; sourceTree = "<group>"; };
+		BCFC34372A3B554E00747EFF /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,12 +104,12 @@
 				BCF1B1D22A0D6B3800431351 /* Lets-Connect.entitlements */,
 				BCA7AC7E29FD7E60009BA121 /* Lets_ConnectApp.swift */,
 				BC6E53312A13AA6B000F66A5 /* LandingPage.swift */,
+				BCFC34372A3B554E00747EFF /* NavigationViewModel.swift */,
 				BCFC34342A3B3AF500747EFF /* CoreDataFiles */,
 				BCFC34332A3B3A5A00747EFF /* HelperFile */,
 				BCFC342F2A3B39B500747EFF /* LoginView */,
 				BCFC34302A3B39E200747EFF /* HomeView */,
 				BCA7AC8229FD7E62009BA121 /* Assets.xcassets */,
-				BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */,
 				BCA7AC8429FD7E62009BA121 /* Preview Content */,
 			);
 			path = "Lets-Connect";
@@ -140,11 +142,7 @@
 		BCFC34302A3B39E200747EFF /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
-				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
-				BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */,
-				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
-				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
+				BCFC34362A3B3E3900747EFF /* OtherViews */,
 				BCFC34322A3B3A3000747EFF /* SocialProfile */,
 				BCFC34312A3B39FA00747EFF /* UserView */,
 			);
@@ -185,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				BCA7AC8729FD7E62009BA121 /* Persistence.swift */,
+				BCA7AC8929FD7E62009BA121 /* Lets_Connect.xcdatamodeld */,
 			);
 			path = CoreDataFiles;
 			sourceTree = "<group>";
@@ -198,6 +197,18 @@
 				BC060BB62A2BAD5A0062E32C /* user.json */,
 			);
 			path = AnimationFiles;
+			sourceTree = "<group>";
+		};
+		BCFC34362A3B3E3900747EFF /* OtherViews */ = {
+			isa = PBXGroup;
+			children = (
+				BC80F22B2A02DD4200B253ED /* QRReceivedView.swift */,
+				BCA7AC9629FD7E7E009BA121 /* QRcodeView.swift */,
+				BC7A0D0A29FE4CC2001DA997 /* RecentView.swift */,
+				BC7A0D0C29FEAB23001DA997 /* ScanAccessView.swift */,
+				BC5937802A0A8A0E0034B3EF /* ContentView.swift */,
+			);
+			path = OtherViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 				BC6E532E2A135C77000F66A5 /* KeychainWrapper.swift in Sources */,
 				BC80F22C2A02DD4200B253ED /* QRReceivedView.swift in Sources */,
 				BCA7AC8B29FD7E62009BA121 /* Lets_Connect.xcdatamodeld in Sources */,
+				BCFC34382A3B554E00747EFF /* NavigationViewModel.swift in Sources */,
 				BCA7AC9C29FD7E7F009BA121 /* SocialMediaProfileModel.swift in Sources */,
 				BC7A0D0D29FEAB23001DA997 /* ScanAccessView.swift in Sources */,
 				BCA7AC7F29FD7E60009BA121 /* Lets_ConnectApp.swift in Sources */,

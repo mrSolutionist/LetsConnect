@@ -8,17 +8,18 @@
 import SwiftUI
 import PhotosUI
 struct EditProfileDetails: View {
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
+    
     @Environment(\.dismiss) var dismiss
     @State private var showAlert = false
 
     var body: some View {
         ScrollView {
             VStack{
-                EditProfileViewPrimarySection(userViewModel: userViewModel)
-                EditProfileDetailView(userViewModel: userViewModel)
-                EditProfileViewBottomSection( userViewModel: userViewModel)
+                EditProfileViewPrimarySection()
+                EditProfileDetailView()
+                EditProfileViewBottomSection( )
            
                 Divider()
                    
@@ -26,7 +27,7 @@ struct EditProfileDetails: View {
                     Text("OR")
                 }
                 .foregroundColor(.white)
-                DeleteUserButton(userViewModel: userViewModel)
+                DeleteUserButton()
                 Spacer()
             }
          
@@ -43,7 +44,7 @@ struct EditProfileDetails: View {
 
 struct EditProfileViewPrimarySection: View {
     @State private var activeProfileIndex: Int? = 0
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
     var body: some View {
         HStack {
@@ -108,7 +109,7 @@ struct EditProfileViewPrimarySection: View {
 
 
 struct EditProfileDetailView: View {
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     
     
     var body: some View {
@@ -177,7 +178,7 @@ struct EditProfileDetailView: View {
 
 struct EditProfileViewBottomSection: View {
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @State var isActiveQR: Bool = false
     @State var showQR: Bool = false
     @Environment(\.dismiss) var dismiss
@@ -237,7 +238,8 @@ struct EditProfileViewBottomSection: View {
 
 struct DeleteUserButton: View {
     @EnvironmentObject  var authViewModel : AuthServiceViewModel
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var navigationRoute: NavigationRouteViewModel
     @Environment(\.dismiss) var dismiss
     
     @State private var showAlert = false
@@ -270,7 +272,8 @@ struct DeleteUserButton: View {
                         switch status {
                         case true:
                             authViewModel.loggedUserDetails = nil
-                            dismiss()
+                            navigationRoute.popToRootView()
+                            
                         case false:
                             showErrorAlert = true
                         }
@@ -279,20 +282,15 @@ struct DeleteUserButton: View {
                 secondaryButton: .cancel()
             )
         }
-        .alert(isPresented: $showErrorAlert) {
-            Alert(
-                title: Text("Error"),
-                message: Text("An error occurred while deleting the user."),
-                dismissButton: .default(Text("OK"))
-            )
-        }
+      
     }
 }
 
 
 struct EditProfileDetails_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileDetails(userViewModel: UserProfileViewModel())
+        EditProfileDetails()
             .environmentObject(AuthServiceViewModel())
+            .environmentObject(UserProfileViewModel())
     }
 }

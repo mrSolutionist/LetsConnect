@@ -37,12 +37,14 @@ struct DataModel {
     
     
     func addSocialProfileToCoreData(profile: SocialMediaProfile) {
+        let currentUser = fetchUserFromCoreData()
         let newProfile = SocialProfiles(context: container.viewContext)
         newProfile.platform = profile.platform.rawValue
         newProfile.profileURL = profile.profileURL
         newProfile.id = profile.id
         newProfile.profileImageName = profile.profileImageName
         newProfile.socialMediaIcon = profile.socialMediaIcon
+        newProfile.user = currentUser
         saveContext()
         
     }
@@ -68,27 +70,32 @@ struct DataModel {
             }
         } catch {
 #if DEBUG
-            
-#endif
             print("Failed to fetch profile: \(error)")
+#endif
+            
         }
         
     }
     
     func fetchSocialProfileData() -> [SocialProfiles]? {
-        let fetchRequest = NSFetchRequest<SocialProfiles>(entityName: "SocialProfiles")
+        guard let currentUser = fetchUserFromCoreData() else {
+            return nil
+        }
+        let fetchRequest: NSFetchRequest<SocialProfiles> = SocialProfiles.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "user == %@", currentUser)
         
         do {
             let data = try container.viewContext.fetch(fetchRequest)
             return data
         } catch {
-#if DEBUG
+            #if DEBUG
             print("Could not fetch data: \(error.localizedDescription)")
-#endif
+            #endif
             
             return nil
         }
     }
+
     
     
     
@@ -99,6 +106,13 @@ struct DataModel {
         saveContext()
     }
     
+    
+    
+    
+    
+    
+    
+    
     func deleteUserEntityFromCoreData(userId: String) -> Bool {
        
         let request : NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
@@ -108,11 +122,13 @@ struct DataModel {
             
             if let user = user.first{
                 container.viewContext.delete(user)
-                return true
-            }
+                saveContext()
 #if DEBUG
             print("deleted user from core data")
 #endif
+                return true
+            }
+
            
         } catch {
             

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    @ObservedObject var userViewModel: UserProfileViewModel
+    @EnvironmentObject var userViewModel: UserProfileViewModel
     @EnvironmentObject var authViewModel: AuthServiceViewModel
+    @EnvironmentObject var navigationRoute: NavigationRouteViewModel
     @Environment (\.dismiss) var dismiss
     
     var body: some View {
         VStack{
-            ProfileViewPrimarySection(userViewModel: userViewModel)
+            ProfileViewPrimarySection()
             ProfileDetailView(socialMediaProfile: userViewModel.dbDataSocialProfiles)
             Spacer()
             Button{
@@ -40,21 +41,26 @@ struct UserProfileView: View {
 
         }
         .background(.black)
+        .onAppear{
+            userViewModel.loadUserDetails()
+        }
     }
 }
         
         struct UserProfileView_Previews: PreviewProvider {
             static var previews: some View {
-                UserProfileView(userViewModel: UserProfileViewModel())
+                UserProfileView()
                     .environmentObject(AuthServiceViewModel() )
+                    .environmentObject(NavigationRouteViewModel())
             }
         }
         
         
         struct ProfileViewPrimarySection: View {
             @State private var activeProfileIndex: Int? = 0
-            @ObservedObject var userViewModel: UserProfileViewModel
+            @EnvironmentObject var userViewModel: UserProfileViewModel
             @EnvironmentObject var authViewModel: AuthServiceViewModel
+            @EnvironmentObject var navigationRoute: NavigationRouteViewModel
             var body: some View {
                 HStack {
                     Spacer()
@@ -81,7 +87,8 @@ struct UserProfileView: View {
                         Text(authViewModel.loggedUserDetails?.fullName ?? "Unknown")
                             .foregroundColor(Color("Secondary"))
                             .fontWeight(.bold)
-                        NavigationLink(destination: EditProfileDetails(userViewModel: userViewModel), label: {
+                        NavigationLink(destination: EditProfileDetails().environmentObject(navigationRoute)
+                            .environmentObject(userViewModel), label: {
                             HStack{
                                 Text("Edit Profile")
                                     .fontWeight(.medium)
