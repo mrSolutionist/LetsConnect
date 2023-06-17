@@ -14,7 +14,7 @@ struct AddLinksView: View {
     @State var activeIndex = 0
     let platforms: [SocialMediaPlatform] = [.Instagram, .Facebook, .LinkedIn, .Youtube, .Whatsapp, .Twitter, .StackOverFlow, .Other]
     @State var url = ""
-    
+    @State var linkCheck = "Link"
 //    var modifiedURL : String {
 //        return addHTTPSPrefix(to: url)
 //    }
@@ -39,6 +39,12 @@ struct AddLinksView: View {
                     ForEach(platforms.indices, id: \.self) { index in
                         Button(action: {
                             activeIndex = index
+                            if platforms[index] == .Whatsapp{
+                                linkCheck = "Include Country Code"
+                            }
+                            else {
+                                linkCheck = "Enter Url"
+                            }
                         }) {
                             ZStack {
                                 Circle()
@@ -55,7 +61,7 @@ struct AddLinksView: View {
                 }
             }
             
-            Text("Link")
+            Text(linkCheck)
                 .foregroundColor(Color("Secondary"))
                 .fontWeight(.bold)
             
