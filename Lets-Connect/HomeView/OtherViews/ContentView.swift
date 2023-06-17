@@ -95,11 +95,14 @@ struct  HomeViewPrimarySection: View {
                         .frame(width: 112, height: 112)
                     if let image = authViewModel.loggedUserDetails?.showImage() {
                         image
+                        
                             .resizable()
                             .scaledToFill()
+                            
                             .clipShape(Circle())
-                            .padding(6)
+                            
                             .frame(width: 100, height: 100)
+                            .padding(6)
                     } else {
                         AnimationViewLottie(lottiefile: "user")
                             .clipShape(Circle())
@@ -131,11 +134,14 @@ struct  HomeViewPrimarySection: View {
                                 .frame(width: 48, height: 48)
                                 
                             AnimationViewLottie(lottiefile: "userIcon")
+                                .padding(6)
+                                .background(.orange)
                                 .clipShape(Circle())
                                 
                                 
-                                .padding(6)
+//
                                 .frame(width: 48, height: 48)
+                               
                         }
                     }
                     
@@ -166,6 +172,7 @@ struct  HomeViewPrimarySection: View {
 struct SocialMediaProfiles: View {
     @EnvironmentObject var userViewModel: UserProfileViewModel
     @State var confirmDelete:Bool = false
+    @State var selectedProfileForDelete: SocialProfiles?
     var body: some View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))], spacing: 20) {
@@ -206,23 +213,26 @@ struct SocialMediaProfiles: View {
                     }.contextMenu {
                         Button(action: {
                             // code to handle update option
-                            userViewModel.profileSelectedForUpdate = profile
+                            let selectedProfile = userViewModel.dbDataSocialProfiles[index]
+                            userViewModel.profileSelectedForUpdate = selectedProfile
                             userViewModel.addProfile.toggle()
                         }) {
                             Label("Update", systemImage: "pencil")
                         }
                         Button(action: {
                             // code to handle delete option
+                            selectedProfileForDelete = userViewModel.dbDataSocialProfiles[index]
                             confirmDelete.toggle()
                         }) {
                             Label("Delete", systemImage: "trash")
                         }
                     }
                     .alert(isPresented: $confirmDelete) {
+                        
                                 Alert(title: Text("Are you sure you want to delete this profile?"),
                                       message: Text("This action cannot be undone."),
                                       primaryButton: .destructive(Text("Delete")) {
-                                    userViewModel.deleteSocialProfile(for: profile)
+                                    userViewModel.deleteSocialProfile(for: selectedProfileForDelete!)
                                       },
                                       secondaryButton: .cancel())
                             }
@@ -348,6 +358,7 @@ struct ContentView_Previews: PreviewProvider {
         VStack {
             ContentView()
                 .environmentObject(AuthServiceViewModel())
+                .environmentObject(UserProfileViewModel())
             
             
         }

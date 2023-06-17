@@ -69,8 +69,9 @@ struct EditProfileViewPrimarySection: View {
                                 .resizable()
                                 .scaledToFill()
                                 .clipShape(Circle())
-                                .padding(6)
+    
                                 .frame(width: 100, height: 100)
+                                .padding(6)
                         } else {
                             AnimationViewLottie(lottiefile: "user")
                                 .clipShape(Circle())

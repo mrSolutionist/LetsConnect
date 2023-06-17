@@ -27,17 +27,46 @@ struct QRcodeView: View {
         colorFilter.setValue(CIColor.clear, forKey: "inputColor1")
         guard let outputImage = colorFilter.outputImage,
               let cgImage = CIContext().createCGImage(outputImage, from: outputImage.extent) else {
-            return AnyView(VStack(alignment: .leading){
-             
-                Text("No profile Selected")
-                Text("Create a profile by clicking on the + button and add a url ")
-                Text("example: www.google.com")
-                    .fontWeight(.bold)
-                Text("Select the profile that u want to share.")
-                Text("A QR will appear after selecting a profile")
-               
-            }.frame(minWidth: 200,minHeight: 200)
-                .background(.white))
+            
+            return AnyView(
+                VStack(alignment: .center, spacing: 16) {
+                    Image(systemName: "person.fill.questionmark")
+                        .font(.system(size: 72))
+                        .foregroundColor(.gray)
+                    
+                    Text("No Profile Selected")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text("Create a profile by clicking on the + button and add a URL.")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                    
+                    Text("Example: www.google.com")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text("Select the profile that you want to share.")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                    
+                    Text("A QR code will appear after selecting a profile.")
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                    
+                }
+                .padding(16)
+                .background(LinearGradient(gradient: Gradient(colors: [Color.mint, Color.yellow]), startPoint: .top, endPoint: .bottom))
+                .cornerRadius(12)
+                .shadow(color: Color.gray.opacity(0.3), radius: 6, x: 0, y: 2)
+            )
+
+
         }
         let uiImage = UIImage(cgImage: cgImage)
         return AnyView(Image(uiImage: uiImage)
